@@ -14,7 +14,7 @@ export default function TrackCard() {
     
     const findItemById = async () => {
         try {
-            const res = await fetch(`${process.env.NEXTAUTH_PURL}/api/items`, {
+            const res = await fetch('https://akglobal.vercel.app/api/items', {
                 cache: 'no-store',
             });
     
