@@ -91,7 +91,7 @@ export default function EditTopicForm({ id, tracking_id, shipped_date, name, des
                         </div>
                         <div className="flex gap-5 flex-col md:flex-row">
                             <div className='flex flex-col gap-1'>
-                                <label>Address-Shipped From:</label>
+                                <label>Country of Origin:</label>
                                 <input 
                                 onChange={(e) => SetNewFrom_address(e.target.value)}
                                 value={newFrom_address}
@@ -100,7 +100,7 @@ export default function EditTopicForm({ id, tracking_id, shipped_date, name, des
                             </div>
                             <span className="md:flex hidden items-center justify-center h-full text-center">-</span>
                             <div className='flex flex-col gap-1'>
-                                <label>Address-Shipped To:</label>
+                                <label>Destination:</label>
                                 <input 
                                 onChange={(e) => SetNewTo_address(e.target.value)}
                                 value={newTo_address}

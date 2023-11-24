@@ -103,7 +103,7 @@ export default function CreateId() {
                         </div>
                         <div className="flex gap-5 flex-col md:flex-row">
                             <div className='flex flex-col gap-1'>
-                                <label>Address-Shipped From:</label>
+                                <label>Country of Origin:</label>
                                 <input 
                                 onChange={(e) => SetTo_address(e.target.value)}
                                 value={to_address}
@@ -112,7 +112,7 @@ export default function CreateId() {
                             </div>
                             <span className="md:flex items-center justify-center h-full text-center hidden">-</span>
                             <div className='flex flex-col gap-1'>
-                                <label>Address-Shipped To:</label>
+                                <label>Destination:</label>
                                 <input 
                                 onChange={(e) => SetFrom_address(e.target.value)}
                                 value={from_address}
@@ -127,7 +127,12 @@ export default function CreateId() {
                             value={delivered_status}
                             id="dlStatus">
                                 <option value="Arrived at port">Arrived at port</option>
-                                <option value="No">No</option>
+                                <option value="Awaiting export clearance">Awaiting export clearance</option>
+                                <option value="Shipped">Shipped</option>
+                                <option value="Arrived at destination port">Arrived at destination port</option>
+                                <option value="Awaiting custom clearance">Awaiting custom clearance</option>
+                                <option value="Awaiting duty payment">Awaiting duty payment</option>
+                                <option value="Customs clearance succeeded">Customs clearance succeeded</option>
                             </select>
                         </div>
                         
