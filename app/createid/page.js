@@ -32,7 +32,7 @@ export default function CreateId() {
         }
 
         try {
-            const res = await fetch(`${process.env.NEXTAUTH_PURL}/api/items`, {
+            const res = await fetch('api/items', {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json",

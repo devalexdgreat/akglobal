@@ -3,17 +3,18 @@ import AddNewIdBtn from "./AddNewIdBtn";
 import editIcon from '@/public/edit.png';
 import Image from "next/image";
 import DeleteBtn from "./DeleteBtn";
+import axios from "axios";
 
 const getItems = async () => {
     try {
         const res = await fetch(`${process.env.NEXTAUTH_PURL}/api/items`, {
             cache: 'no-store',
         });
-
+        
         if(!res.ok) {
             throw new Error("Failed to fetch items");
         }
-
+        
         return res.json();
     } catch (error) {
         console.log("Error loading items: ", error);
@@ -27,7 +28,7 @@ export default async function ItemList() {
     return(
         <>
             {items.map((t) => (
-            <div key={t.id} className="border border-blue-500 rounded-lg p-4 relative 
+            <div key={t._id} className="border border-blue-500 rounded-lg p-4 relative 
             hover:bg-slate-100 admin-item group/item">
                 <div className="absolute flex md:invisible group-hover/item:visible 
                 md:bottom-[40%] md:left-[20%] w-40 gap-2 pt-2 items-center md:flex-row flex-col right-[-13%] top-0

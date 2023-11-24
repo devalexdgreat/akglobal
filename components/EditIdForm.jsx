@@ -4,6 +4,7 @@ import Image from "next/image";
 import refIcon from "@/public/ref.png";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 export default function EditTopicForm({ id, tracking_id, shipped_date, name, description, 
     from_address, to_address, delivered_status }) {
@@ -22,14 +23,18 @@ export default function EditTopicForm({ id, tracking_id, shipped_date, name, des
         e.preventDefault();
 
         try {
-            const res = await fetch(`${process.env.NEXTAUTH_PURL}/api/items/${id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-type": "application/json",
-                },
-                body: JSON.stringify({ newTracking_id, newShipped_date, newName, newDescription, newFrom_address, 
-                newTo_address, newDelivered_status })
-            });
+            const res = await axios
+                .put(`/api/items/${id}`, {
+                    newTracking_id, newShipped_date, newName, newDescription, newFrom_address, 
+                    newTo_address, newDelivered_status
+                })
+                .then(function (response) {
+                console.log(response);
+                router.push("/admin");
+                router.refresh();
+                });
+
+            
             
             if (!res.ok) {
                 throw new Error("Failed to Update Items");
