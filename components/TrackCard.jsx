@@ -23,7 +23,7 @@ export default function TrackCard() {
             }
             console.log(res);
             console.log(searchVar);
-            const { items } = await res.json();
+            const items = await res.json();
             console.log(items);
 
             if(searchVar === "" || searchVar.length < 9) {
