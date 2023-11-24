@@ -17,7 +17,7 @@ export default function TrackInfo({data, displayData}) {
                         <div className="flex flex-col w-full">
                             <span className="font-bold mt-6">Delivery Status:</span>
                             <div className="flex gap-1">
-                                <span className="flex font-bold">{data.delivered_status.charAt(17)}</span>
+                                <span className="flex font-bold">{data.delivered_status.slice(0, 18)}</span>
                                 <span className="flex">{data.delivered_status.substr(17, words.length - 1)}</span>
                             </div>
                         </div>
