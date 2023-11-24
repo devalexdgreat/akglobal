@@ -15,6 +15,7 @@ const getItems = async () => {
         }
         
         const items = await res.json();
+        console.log(items);
         return items;
     } catch (error) {
         console.log("Error loading items: ", error);
@@ -22,8 +23,8 @@ const getItems = async () => {
 }
 
 export default async function ItemList() {
-
-    const items = await getItems();
+    let items;
+    items = await getItems();
 
     return(
         <>
