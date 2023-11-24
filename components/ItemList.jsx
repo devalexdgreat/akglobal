@@ -1,35 +1,44 @@
+"use client";
 import Link from "next/link";
 import AddNewIdBtn from "./AddNewIdBtn";
 import editIcon from '@/public/edit.png';
 import Image from "next/image";
 import DeleteBtn from "./DeleteBtn";
+import { useEffect, useState } from "react";
 
-const getItems = async () => {
-    try {
-        const res = await fetch('https://akglobal.vercel.app/api/items', {
-            cache: 'no-store',
-        });
-        
-        if(!res.ok) {
-            throw new Error("Failed to fetch items");
-        }
-        
-        const items = await res.json();
-        console.log(items);
-        return items;
-    } catch (error) {
-        console.log("Error loading items: ", error);
-    }
-}
 
-export default async function ItemList() {
+
+export default function ItemList() {
+
+    const [itemsFound, setItemsFound] = useState([]);
+
+    useEffect(() => {
+        const getItems = async () => {
+            try {
+                const res = await fetch('https://akglobal.vercel.app/api/items', {
+                    cache: 'no-store',
+                });
+                
+                if(!res.ok) {
+                    throw new Error("Failed to fetch items");
+                }
+                
+                const items = await res.json();
+                console.log(items);
     
-    items = await getItems();
+                setItemsFound(items);
+                return items;
+            } catch (error) {
+                console.log("Error loading items: ", error);
+            }
+        }
+    })
 
+   
 
     return(
         <>
-            {items.map((t) => (
+            {itemsFound.map((t) => (
             <div key={t._id} className="border border-blue-500 rounded-lg p-4 relative 
             hover:bg-slate-100 admin-item group/item">
                 <div className="absolute flex md:invisible group-hover/item:visible 
