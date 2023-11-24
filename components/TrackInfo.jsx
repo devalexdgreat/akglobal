@@ -6,11 +6,11 @@ export default function TrackInfo({data, displayData}) {
                 <div className="flex flex-col">
                     <h1 className="mt-6 font-bold">Shipment Details</h1>
                     <ul className="list-disc ms-4">
-                        <li><span className="font-medium">Name of Item: </span>{data.name}</li>
-                        <li><span className="font-medium">Item Description: </span>{data.description}</li>
-                        <li><span className="font-medium">Shipped Date: </span>{data.shipped_date}</li>
-                        <li><span className="font-medium">Country of Origin: </span>{data.from_address}</li>
-                        <li><span className="font-medium">Destination: </span>{data.to_address}</li>
+                        <li><span className="font-bold">Name of Item: </span>{data.name}</li>
+                        <li><span className="font-bold">Item Description: </span>{data.description}</li>
+                        <li><span className="font-bold">Shipped Date: </span>{data.shipped_date}</li>
+                        <li><span className="font-bold">Country of Origin: </span>{data.from_address}</li>
+                        <li><span className="font-bold">Destination: </span>{data.to_address}</li>
                     </ul>
 
                     <div className="mt-6 flex justify-between items-center">
