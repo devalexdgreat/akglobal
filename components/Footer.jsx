@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Logo from "@/public/logo.png";
 
+
 export default function Footer() {
     return (
         <div className="w-full mt-12 bg-black pt-12 text-white">
