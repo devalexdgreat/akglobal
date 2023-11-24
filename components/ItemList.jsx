@@ -3,7 +3,6 @@ import AddNewIdBtn from "./AddNewIdBtn";
 import editIcon from '@/public/edit.png';
 import Image from "next/image";
 import DeleteBtn from "./DeleteBtn";
-import axios from "axios";
 
 const getItems = async () => {
     try {
@@ -15,7 +14,8 @@ const getItems = async () => {
             throw new Error("Failed to fetch items");
         }
         
-        return res.json();
+        const items = await res.json();
+        return items;
     } catch (error) {
         console.log("Error loading items: ", error);
     }
@@ -23,7 +23,7 @@ const getItems = async () => {
 
 export default async function ItemList() {
 
-    const { items } = await getItems();
+    const items = await getItems();
 
     return(
         <>
