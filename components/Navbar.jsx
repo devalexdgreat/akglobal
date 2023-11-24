@@ -18,7 +18,7 @@ export default function Navbar() {
             <div className="w-10/12 md:w-11/12 mx-auto h-20 flex justify-between items-center text-white">
                 <Link className="font-medium text-lg gap-1 flex items-center" href={'/'}>
                     <Image src={Logo} alt="" className="h-10 w-10" />
-                    <span className="font-bold text-2xl">AK GLOBAL SHIP SERVICES</span>
+                    <span className="font-bold text-2xl hidden md:block">AK GLOBAL SHIP SERVICES</span>
                 </Link>
                 
                 <div className="hidden gap-8 md:flex items-center">

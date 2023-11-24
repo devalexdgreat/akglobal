@@ -15,7 +15,7 @@ export default function ItemList() {
     useEffect(() => {
         const getItems = async () => {
             try {
-                const res = await fetch('https://akglobal.vercel.app/api/items', {
+                const res = await fetch('https://www.akglobalshipservices.com/api/items', {
                     cache: 'no-store',
                 });
                 
