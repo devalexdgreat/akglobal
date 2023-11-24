@@ -108,20 +108,13 @@ export default function EditTopicForm({ id, tracking_id, shipped_date, name, des
                                 className='w-full border border-black p-3 rounded-lg new-inp'/>
                             </div>
                         </div>
-                        <div className="flex gap-2">
-                            <label>Delivery Status</label>
-                            <select 
+                        <div className='flex flex-col gap-1'>
+                            <label>Delivery Status:</label>
+                            <input 
                             onChange={(e) => SetNewDelivered_status(e.target.value)}
                             value={newDelivered_status}
-                            id="dlStatus">
-                                <option value="Arrived at port">Arrived at port</option>
-                                <option value="Awaiting export clearance">Awaiting export clearance</option>
-                                <option value="Shipped">Shipped</option>
-                                <option value="Arrived at destination port">Arrived at destination port</option>
-                                <option value="Awaiting custom clearance">Awaiting custom clearance</option>
-                                <option value="Awaiting duty payment">Awaiting duty payment</option>
-                                <option value="Customs clearance succeeded">Customs clearance succeeded</option>
-                            </select>
+                            type='text' placeholder='Enter Destination address' 
+                            className='w-full border border-black p-3 rounded-lg new-inp'/>
                         </div>
                         
                         <div className='flex'>
