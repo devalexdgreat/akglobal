@@ -31,8 +31,9 @@ export default function ItemList() {
             } catch (error) {
                 console.log("Error loading items: ", error);
             }
-        }
-    })
+        };
+        getItems();
+    }, [])
 
    
 
