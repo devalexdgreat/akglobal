@@ -10,8 +10,9 @@ export default function Footer() {
                 <div className="w-full flex flex-col gap-1 md:gap-0 md:flex-row items-center 
                 text-center justify-center md:justify-between">
                     <div className="flex flex-col md:flex-row w-full md:w-6/12 justify-between">
-                    <Link className="font-medium text-lg flex items-center justify-center" href={'/'}>
+                    <Link className="font-medium text-lg flex items-center gap-1 justify-center" href={'/'}>
                         <Image src={Logo} alt="" className="h-10 w-10" />
+                        <span>AK GLOBAL SHIP SERVICES</span>
                     </Link>
                         <div className="flex flex-col gap-4 md:mt-0 mt-4">
                             <h1 className="font-medium text-blue-600">Contact</h1>
@@ -28,7 +29,7 @@ export default function Footer() {
                     </div>
                 </div>
                 <div className="w-full flex justify-center mt-12 py-5">
-                    <span>2023 &copy; Logo. All rights reserved.</span>
+                    <span>2023 &copy; AK GLOBAL SHIP SERVICES. All rights reserved.</span>
                 </div>
             </div>
         </div>

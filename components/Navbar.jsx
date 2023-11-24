@@ -16,8 +16,9 @@ export default function Navbar() {
     return (
         <div className="w-full bg-blue-500">
             <div className="w-10/12 md:w-11/12 mx-auto h-20 flex justify-between items-center text-white">
-                <Link className="font-medium text-lg dis" href={'/'}>
-                <Image src={Logo} alt="" className="h-10 w-10" /></Link>
+                <Link className="font-medium text-lg gap-1 flex" href={'/'}>
+                    <Image src={Logo} alt="" className="h-10 w-10" /><span>AK GLOBAL SHIP SERVICES</span>
+                </Link>
                 
                 <div className="hidden gap-8 md:flex items-center">
                     <Link className="bg-white text-blue-500 px-6 py-2 rounded-lg hover:bg-slate-100" 
