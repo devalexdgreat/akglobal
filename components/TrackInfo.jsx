@@ -17,8 +17,8 @@ export default function TrackInfo({data, displayData}) {
                             <span>{data.delivered_status}</span> 
                         </div>
                         <div className="w-6/12">
-                            <div className="h-3 bg-slate-300 flex">
-                                <div className="h-full bg-green-500 w-5/12"></div>
+                            <div className="h-3 bg-white flex">
+                                <div className="h-full white w-5/12"></div>
                             </div>
                         </div>
                     </div>
