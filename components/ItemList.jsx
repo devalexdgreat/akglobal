@@ -25,6 +25,7 @@ const getItems = async () => {
 export default async function ItemList() {
     let items;
     items = await getItems();
+    
 
     return(
         <>
