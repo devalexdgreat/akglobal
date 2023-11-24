@@ -28,7 +28,7 @@ export default function RegisterForm() {
 
         try {
 
-            const resUserExists = await fetch("http://localhost:3000/api/userExists", {
+            const resUserExists = await fetch(`${process.env.NEXTAUTH_PURL}/api/userExists`, {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json",
@@ -43,7 +43,7 @@ export default function RegisterForm() {
                 return;
             }
 
-            const res = await fetch("http://localhost:3000/api/regists", {
+            const res = await fetch(`${process.env.NEXTAUTH_PURL}/api/regists`, {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json",

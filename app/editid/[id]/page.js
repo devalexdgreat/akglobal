@@ -3,7 +3,7 @@ import EditTopicForm from "@/components/EditIdForm";
 
 const getItemById = async (id) => {
     try {
-        const res = await fetch(`http://localhost:3000/api/items/${id}`, {
+        const res = await fetch(`${process.env.NEXTAUTH_PURL}/api/items/${id}`, {
             cache: "no-store",
         });
 

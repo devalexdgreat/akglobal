@@ -6,7 +6,7 @@ import DeleteBtn from "./DeleteBtn";
 
 const getItems = async () => {
     try {
-        const res = await fetch('http://localhost:3000/api/items', {
+        const res = await fetch(`${process.env.NEXTAUTH_PURL}/api/items`, {
             cache: 'no-store',
         });
 

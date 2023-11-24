@@ -11,7 +11,7 @@ import Navbar from '@/components/Navbar';
 export default async function Login() {
     const session = await getServerSession(authOptions);
 
-    if(session) redirect("/track");
+    if(session) redirect("/admin");
 
     return(
         <>

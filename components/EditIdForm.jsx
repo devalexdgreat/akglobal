@@ -22,7 +22,7 @@ export default function EditTopicForm({ id, tracking_id, shipped_date, name, des
         e.preventDefault();
 
         try {
-            const res = await fetch(`http://localhost:3000/api/items/${id}`, {
+            const res = await fetch(`${process.env.NEXTAUTH_PURL}/api/items/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-type": "application/json",

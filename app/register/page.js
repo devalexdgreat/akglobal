@@ -6,7 +6,7 @@ import { authOptions } from '../api/auth/[...nextauth]/route';
 export default async function Login() {
     const session = await getServerSession(authOptions);
 
-    if(session) redirect("/track");
+    if(session) redirect("/admin");
 
     return(
         <div className="w-full login-wrap flex items-center">
