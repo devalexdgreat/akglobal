@@ -9,11 +9,13 @@ export default function TrackInfo({data, displayData}) {
                         <li>Name of Item: {data.name}</li>
                         <li>Item Description: {data.description}</li>
                         <li>Shipped Date: {data.shipped_date}</li>
+                        <li>Shipped From: {data.from_address}</li>
+                        <li>Shipped To: {data.to_address}</li>
                     </ul>
 
                     <div className="mt-6 flex justify-between items-center">
                         <div className="flex flex-col w-6/12">
-                            <span className="font-bold mt-6">Delivered Status:</span>
+                            <span className="font-bold mt-6">Delivery Status:</span>
                             <span>{data.delivered_status}</span> 
                         </div>
                         <div className="w-6/12">

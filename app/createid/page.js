@@ -13,7 +13,7 @@ export default function CreateId() {
     const [description, SetDescription] = useState("");
     const [from_address, SetFrom_address] = useState("");
     const [to_address, SetTo_address] = useState("");
-    const [delivered_status, SetDelivered_status] = useState("No");
+    const [delivered_status, SetDelivered_status] = useState("Arrived at port");
 
     const router = useRouter();
 
@@ -121,12 +121,12 @@ export default function CreateId() {
                             </div>
                         </div>
                         <div className="flex gap-2">
-                            <label>Delivered Status</label>
+                            <label>Delivery Status</label>
                             <select 
                             onChange={(e) => SetDelivered_status(e.target.value)}
                             value={delivered_status}
                             id="dlStatus">
-                                <option value="Yes">Yes</option>
+                                <option value="Arrived at port">Arrived at port</option>
                                 <option value="No">No</option>
                             </select>
                         </div>

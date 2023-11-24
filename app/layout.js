@@ -8,11 +8,17 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata = {
   title: 'Ak Global - Track your Shipment',
   description: 'Ak Global Ship Services PTE.',
+  icons: {
+    icon: '/favicon.png',
+  },
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link rel='icon' href='/favicon.png'/>
+      </head>
       <body className={inter.className}>
         <div className='relative min-h-screen'>
           <AuthProvider>
