@@ -6,7 +6,7 @@ import DeleteBtn from "./DeleteBtn";
 
 const getItems = async () => {
     try {
-        const res = await fetch(`${process.env.NEXTAUTH_PURL}/api/items`, {
+        const res = await fetch('https://akglobal.vercel.app/api/items', {
             cache: 'no-store',
         });
         
@@ -24,12 +24,12 @@ const getItems = async () => {
 
 export default async function ItemList() {
     
-    // items = await getItems();
+    items = await getItems();
 
 
     return(
         <>
-            {/* {items.map((t) => (
+            {items.map((t) => (
             <div key={t._id} className="border border-blue-500 rounded-lg p-4 relative 
             hover:bg-slate-100 admin-item group/item">
                 <div className="absolute flex md:invisible group-hover/item:visible 
@@ -51,7 +51,7 @@ export default async function ItemList() {
                     <h1 className="truncate">Delivered Status: {t.delivered_status}</h1>
                 </div>
             </div>
-            ))} */}
+            ))}
         </>
     );
 }
