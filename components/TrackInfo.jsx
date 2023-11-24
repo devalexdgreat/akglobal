@@ -16,7 +16,7 @@ export default function TrackInfo({data, displayData}) {
                     <div className="mt-6 flex justify-between items-center">
                         <div className="flex flex-col w-6/12">
                             <span className="font-bold mt-6">Delivery Status:</span>
-                            <span>{data.delivered_status}</span> 
+                            <span className="flex">{data.delivered_status}</span> 
                         </div>
                         <div className="w-6/12">
                             <div className="h-3 bg-white flex">
