@@ -10,7 +10,7 @@ export default function DeleteBtn({ id }) {
         const confirmed = confirm("Are you sure, you want to delete item?");
 
         if (confirmed) {
-            const res = await fetch(`https://www.akglobalshipservices.com/api/items?id=${id}`, {
+            const res = await fetch(`http://localhost:3000/api/items?id=${id}`, {
                 method: "DELETE",
             });
 

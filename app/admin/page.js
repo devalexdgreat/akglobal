@@ -1,7 +1,6 @@
 import AddNewIdBtn from "@/components/AddNewIdBtn";
 import Image from "next/image";
 import ItemList from "@/components/ItemList";
-import Navbar from "@/components/Navbar";
 import AdminNav from "@/components/AdminNav";
 
 export default function AdminPage() {

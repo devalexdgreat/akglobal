@@ -57,11 +57,13 @@ export default function TrackCard() {
 
     return(
         <div className="w-full">
-                <div className="w-6/12 mx-auto text-center my-12">
-                    <h1 className="text-2xl md:text-4xl">Track & Trace</h1>
+                <div className="w-5/12 mx-auto text-center mt-20 mb-2">
+                    <h1 className="text-2xl md:text-3xl">
+                        Check the location and status of your shipments.
+                    </h1>
                 </div>
 
-                <div className="w-full bg-blue-200 py-12">
+                <div className="w-full py-12">
                     <div className="w-11/12 md:w-10/12 mx-auto overflow-hidden">
                         <div className="w-full bg-white md:w-6/12 mx-auto flex justify-between rounded-lg p-1 
                         border border-black h-14">

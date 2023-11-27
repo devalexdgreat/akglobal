@@ -20,9 +20,11 @@ export default function AdminNav() {
     return (
         <div className="w-full bg-blue-500">
             <div className="w-10/12 md:w-11/12 mx-auto h-20 flex justify-between items-center text-white">
-                <Link className="font-medium text-lg flex gap-1 items-center" href={'/'}>
+                <Link className="font-medium text-lg gap-1 flex items-center" href={'/'}>
                     <Image src={Logo} alt="" className="h-10 w-10" />
-                    <span className="text-2xl font-bold">AK GLOBAL SHIP SERVICES</span>
+                    <span className="font-bold text-xl hidden md:flex flex-col">
+                        <span>AK GLOBAL</span><span>SHIP SERVICES</span>
+                    </span>
                 </Link>
                 <div className="justify-between py-3 gap-8 md:flex items-center hidden">
                     <div className="flex gap-3">
