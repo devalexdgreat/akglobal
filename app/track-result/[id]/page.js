@@ -8,8 +8,68 @@ import dirIcon from "@/public/dir.png";
 import conIcon from "@/public/contact.png";
 import weightIcon from "@/public/ib.png";
 import sizeIcon from "@/public/size.png";
+import { redirect } from 'next/navigation';
 
-export default function TrackResult() {
+const getItems = async () => {
+    try {
+        const res = await fetch(`${process.env.NEXTAUTH_PURL}/api/items`, {
+            cache: "no-store",
+        });
+
+        if (!res.ok) {
+            throw new Error("Failed to fetch item");
+        }
+        const items = await res.json();
+        console.log("i am all the ", items);
+        return items;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const getComments = async () => {
+    try {
+        const res = await fetch('https://www.akglobalshipservices.com/api/comments', {
+            cache: 'no-store',
+        });
+        
+        if(!res.ok) {
+            throw new Error("Failed to fetch Comments");
+        }
+
+        const comments = await res.json();
+        console.log("i am all the ", comments);
+        return comments;
+        
+
+    } catch (error) {
+        console.log("Error loading comments: ", error);
+    }
+};
+
+export default async function TrackResult({ params }) {
+    const { id } = params;
+    const askedId = id;
+    const allItems = await getItems();
+    const allComs = await getComments();
+
+    console.log("I am all Items: ", allItems);
+    console.log("I am all Comments: ", allComs);
+    console.log("I am Asked Id: ", askedId);
+
+    const matchedItem = allItems.filter(obj => obj.tracking_id == askedId);
+    if(matchedItem.length === 0) {
+        console.log("error");
+        redirect('/errorShow');
+        return;
+    }
+    console.log("hey: ", matchedItem);
+    console.log("my iD is: ", matchedItem[0]._id);
+
+
+    const matchedComment = allComs.filter(obj => obj.itemid == matchedItem[0]._id);
+    console.log("Good Morning", matchedComment);
+
     return (
         <div className="w-full">
             <Navbar />
@@ -25,7 +85,9 @@ export default function TrackResult() {
                             </div>
                             <div className="flex flex-col">
                                 <span>Track Shipment ID: </span>
-                                <span className="font-bold">374747577577</span>
+                                <span className="font-bold">
+                                    {matchedItem[0].tracking_id}
+                                </span>
                             </div>
                         </div>
 
@@ -42,7 +104,9 @@ export default function TrackResult() {
                                             </div>
                                             <div className="flex flex-col gap-1">
                                                 <span>City Collection</span>
-                                                <span className="font-bold">Malaysia</span>
+                                                <span className="font-bold">
+                                                    {matchedItem[0].city_collection}
+                                                </span>
                                             </div>
                                         </div>
                                         <div className="flex gap-2 items-center w-3/6 border-b py-6">
@@ -51,7 +115,9 @@ export default function TrackResult() {
                                             </div>
                                             <div className="flex flex-col gap-1">
                                                 <span>Origin City</span>
-                                                <span className="font-bold">Kuala Lumpur</span>
+                                                <span className="font-bold">
+                                                    {matchedItem[0].origin_city}
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -63,7 +129,9 @@ export default function TrackResult() {
                                             </div>
                                             <div className="flex flex-col gap-1">
                                                 <span>Shipping Date</span>
-                                                <span className="font-bold">2023-08-14</span>
+                                                <span className="font-bold">
+                                                    {matchedItem[0].shipping_date}
+                                                </span>
                                             </div>
                                         </div>
                                         <div className="flex gap-2 items-center w-3/6 border-b py-6">
@@ -72,7 +140,9 @@ export default function TrackResult() {
                                             </div>
                                             <div className="flex flex-col gap-1">
                                                 <span>Shipping Time</span>
-                                                <span className="font-bold">DHL 7-10 DAYS</span>
+                                                <span className="font-bold">
+                                                    {matchedItem[0].shipping_time}
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -84,7 +154,9 @@ export default function TrackResult() {
                                             </div>
                                             <div className="flex flex-col gap-1">
                                                 <span>Contact Name</span>
-                                                <span className="font-bold">Janice Celine Watkins</span>
+                                                <span className="font-bold">
+                                                    {matchedItem[0].sender_name}
+                                                </span>
                                             </div>
                                         </div>
                                         <div className="flex gap-2 items-center w-3/6 border-b py-6">
@@ -94,7 +166,7 @@ export default function TrackResult() {
                                             <div className="flex flex-col gap-1">
                                                 <span>Contact Address</span>
                                                 <span className="font-bold">
-                                                    Stonor Residence 27-8 No. 3 Lorong Stonor
+                                                    {matchedItem[0].sender_address}
                                                 </span>
                                             </div>
                                         </div>
@@ -107,7 +179,9 @@ export default function TrackResult() {
                                             </div>
                                             <div className="flex flex-col gap-1">
                                                 <span>Shipping Quantity</span>
-                                                <span className="font-bold">1</span>
+                                                <span className="font-bold">
+                                                    {matchedItem[0].shipping_quantity}
+                                                </span>
                                             </div>
                                         </div>
                                         <div className="flex gap-2 items-center w-3/6 border-b py-6">
@@ -116,7 +190,9 @@ export default function TrackResult() {
                                             </div>
                                             <div className="flex flex-col gap-1">
                                                 <span>Total Weight (Ibs)</span>
-                                                <span className="font-bold">560</span>
+                                                <span className="font-bold">
+                                                    {matchedItem[0].item_weight}
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -137,7 +213,9 @@ export default function TrackResult() {
                                             </div>
                                             <div className="flex flex-col gap-1">
                                                 <span>Delivery City</span>
-                                                <span className="font-bold">Tasmania</span>
+                                                <span className="font-bold">
+                                                    {matchedItem[0].delivery_city}
+                                                </span>
                                             </div>
                                         </div>
                                         <div className="flex gap-2 items-center w-3/6 border-b py-6">
@@ -146,7 +224,9 @@ export default function TrackResult() {
                                             </div>
                                             <div className="flex flex-col gap-1">
                                                 <span>Origin City</span>
-                                                <span className="font-bold">Tasmania</span>
+                                                <span className="font-bold">
+                                                    {matchedItem[0].destination_city}
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -158,7 +238,9 @@ export default function TrackResult() {
                                             </div>
                                             <div className="flex flex-col gap-1">
                                                 <span>Shipping Time</span>
-                                                <span className="font-bold">DHL 7-10 DAYS</span>
+                                                <span className="font-bold">
+                                                    {matchedItem[0].delivery_time}
+                                                </span>
                                             </div>
                                         </div>
                                         <div className="flex gap-2 items-center w-3/6 border-b py-6">
@@ -167,7 +249,9 @@ export default function TrackResult() {
                                             </div>
                                             <div className="flex flex-col gap-1">
                                                 <span>Delivery Time</span>
-                                                <span className="font-bold">2023-08-14 00:00:00</span>
+                                                <span className="font-bold">
+                                                    {matchedItem[0].delivery_time}
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -179,7 +263,9 @@ export default function TrackResult() {
                                             </div>
                                             <div className="flex flex-col gap-1">
                                                 <span>Contact Name</span>
-                                                <span className="font-bold">Leslie J. Walkden</span>
+                                                <span className="font-bold">
+                                                    {matchedItem[0].receiver_name}
+                                                </span>
                                             </div>
                                         </div>
                                         <div className="flex gap-2 items-center w-3/6 border-b py-6">
@@ -189,7 +275,7 @@ export default function TrackResult() {
                                             <div className="flex flex-col gap-1">
                                                 <span>Contact Address</span>
                                                 <span className="font-bold">
-                                                    2782 West Tamar Highway Loira
+                                                    {matchedItem[0].receiver_address}
                                                 </span>
                                             </div>
                                         </div>
@@ -203,15 +289,16 @@ export default function TrackResult() {
                            <h1 className="font-bold text-xl">Shipping history</h1> 
                         </div>
                         <div className="flex flex-col gap-5">
-                            <ul className="border-l-2 border-blue-500 p-4 list-disc">
+                        {matchedComment.map((t) => (
+                            <ul key={t._id} className="border-l-2 border-blue-500 p-4 list-disc">
                                 <li className="flex justify-between">
                                     <div>
-                                        <h1>2023/08/09</h1>
-                                        <h1 className="font-bold mb-4">Pending quote</h1>
+                                        <h1>{t.ddate}</h1>
+                                        <h1 className="font-bold mb-4">{t.dquote}</h1>
                                         <span class="group relative">
                                             <div class="absolute bottom-[calc(100%+0.5rem)] left-[50%] -translate-x-[50%] hidden group-hover:block w-auto">
                                             <div class="bottom-full right-0 rounded bg-black px-4 py-1 text-base text-white whitespace-nowrap">
-                                                Shipment fee required
+                                                {t.dcomment}
                                                 <svg class="absolute left-0 top-full h-2 w-full text-black" 
                                                 x="0px" y="0px" viewBox="0 0 255 255"><polygon class="fill-current" 
                                                 points="0,0 127.5,127.5 255,0" /></svg>
@@ -223,102 +310,11 @@ export default function TrackResult() {
                                         </span>
                                     </div>
                                     <div className="flex">
-                                        <h1>10:23:33 pm</h1>
+                                        <h1>{t.dtime}</h1>
                                     </div>
                                 </li>
                             </ul>
-                            <ul className="border-l-2 border-blue-500 p-4 list-disc">
-                                <li className="flex justify-between">
-                                    <div>
-                                        <h1>2023/08/09</h1>
-                                        <h1 className="font-bold mb-4">Pending quote</h1>
-                                        <span class="group relative">
-                                            <div class="absolute bottom-[calc(100%+0.5rem)] left-[50%] -translate-x-[50%] hidden group-hover:block w-auto">
-                                            <div class="bottom-full right-0 rounded bg-black px-4 py-1 text-base text-white whitespace-nowrap">
-                                                Shipment fee required
-                                                <svg class="absolute left-0 top-full h-2 w-full text-black" 
-                                                x="0px" y="0px" viewBox="0 0 255 255"><polygon class="fill-current" 
-                                                points="0,0 127.5,127.5 255,0" /></svg>
-                                            </div>
-                                            </div>
-                                            <span className="py-1.5 px-4 hover:cursor-pointer bg-white border rounded-lg
-                                            font-medium">+ Comments</span>
-                                        </span>
-                                    </div>
-                                    <div className="flex">
-                                        <h1>10:23:33 pm</h1>
-                                    </div>
-                                </li>
-                            </ul>
-                            <ul className="border-l-2 border-blue-500 p-4 list-disc">
-                                <li className="flex justify-between">
-                                    <div>
-                                        <h1>2023/08/09</h1>
-                                        <h1 className="font-bold mb-4">Pending quote</h1>
-                                        <span class="group relative">
-                                            <div class="absolute bottom-[calc(100%+0.5rem)] left-[50%] -translate-x-[50%] hidden group-hover:block w-auto">
-                                            <div class="bottom-full right-0 rounded bg-black px-4 py-1 text-base text-white whitespace-nowrap">
-                                                Shipment fee required
-                                                <svg class="absolute left-0 top-full h-2 w-full text-black" 
-                                                x="0px" y="0px" viewBox="0 0 255 255"><polygon class="fill-current" 
-                                                points="0,0 127.5,127.5 255,0" /></svg>
-                                            </div>
-                                            </div>
-                                            <span className="py-1.5 px-4 hover:cursor-pointer bg-white border rounded-lg
-                                            font-medium">+ Comments</span>
-                                        </span>
-                                    </div>
-                                    <div className="flex">
-                                        <h1>10:23:33 pm</h1>
-                                    </div>
-                                </li>
-                            </ul>
-                            <ul className="border-l-2 border-blue-500 p-4 list-disc">
-                                <li className="flex justify-between">
-                                    <div>
-                                        <h1>2023/08/09</h1>
-                                        <h1 className="font-bold mb-4">Pending quote</h1>
-                                        <span class="group relative">
-                                            <div class="absolute bottom-[calc(100%+0.5rem)] left-[50%] -translate-x-[50%] hidden group-hover:block w-auto">
-                                            <div class="bottom-full right-0 rounded bg-black px-4 py-1 text-base text-white whitespace-nowrap">
-                                                Shipment fee required
-                                                <svg class="absolute left-0 top-full h-2 w-full text-black" 
-                                                x="0px" y="0px" viewBox="0 0 255 255"><polygon class="fill-current" 
-                                                points="0,0 127.5,127.5 255,0" /></svg>
-                                            </div>
-                                            </div>
-                                            <span className="py-1.5 px-4 hover:cursor-pointer bg-white border rounded-lg
-                                            font-medium">+ Comments</span>
-                                        </span>
-                                    </div>
-                                    <div className="flex">
-                                        <h1>10:23:33 pm</h1>
-                                    </div>
-                                </li>
-                            </ul>
-                            <ul className="border-l-2 border-blue-500 p-4 list-disc">
-                                <li className="flex justify-between">
-                                    <div>
-                                        <h1>2023/08/09</h1>
-                                        <h1 className="font-bold mb-4">Pending quote</h1>
-                                        <span class="group relative">
-                                            <div class="absolute bottom-[calc(100%+0.5rem)] left-[50%] -translate-x-[50%] hidden group-hover:block w-auto">
-                                            <div class="bottom-full right-0 rounded bg-black px-4 py-1 text-base text-white whitespace-nowrap">
-                                                Shipment fee required
-                                                <svg class="absolute left-0 top-full h-2 w-full text-black" 
-                                                x="0px" y="0px" viewBox="0 0 255 255"><polygon class="fill-current" 
-                                                points="0,0 127.5,127.5 255,0" /></svg>
-                                            </div>
-                                            </div>
-                                            <span className="py-1.5 px-4 hover:cursor-pointer bg-white border rounded-lg
-                                            font-medium">+ Comments</span>
-                                        </span>
-                                    </div>
-                                    <div className="flex">
-                                        <h1>10:23:33 pm</h1>
-                                    </div>
-                                </li>
-                            </ul>
+                            ))}
                         </div>
                     </div>
                 </div>

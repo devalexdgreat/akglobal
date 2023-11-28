@@ -3,6 +3,8 @@ import mongoose, { Schema } from "mongoose";
 const itemSchema = new Schema(
     {
         tracking_id: Number,
+        origin_city: String,
+        city_collection: String,
         shipping_date: String,
         shipping_time: String,
         sender_name: String,
@@ -14,8 +16,7 @@ const itemSchema = new Schema(
         shipping_time_rec: String,
         delivery_time: String,
         receiver_name: String,
-        receiver_address: String,
-        comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}]
+        receiver_address: String
     },
     {
         timestamps: true,

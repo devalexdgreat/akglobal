@@ -3,10 +3,10 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
-export default function CommentForm({ id, track_id }) {
+export default function CommentForm({ useId }) {
 
     const router = useRouter();
-    
+    const itemid = useId;
     const [ddate, SetDdate] = useState("");
     const [dtime, SetDtime] = useState("");
     const [dquote, SetDquote] = useState("");
@@ -19,29 +19,21 @@ export default function CommentForm({ id, track_id }) {
             alert('This fields are required!');
             return;
         }
-        console.log(track_id)
+
         try {
-            const res = await fetch('/api/addComment', {
+            const res = await fetch('/api/comments', {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json",
                 },
-                body: JSON.stringify({ id, ddate, dtime, dquote, dcomment }),
+                body: JSON.stringify({ itemid, ddate, dtime, dquote, dcomment }),
             });
 
-            // const res = await axios.post(`/api/comments`, {
-            //     track_id, ddate, dtime, dquote, dcomment
-            // })
-            // .then(function (response) {
-            //     console.log(response);
-            //     router.push(`/viewid/${id}`);
-            //     router.refresh();
-            // });
 
             if (res.ok) {
                 const data = await res.json();
                 console.log("Comment Created: ", data);
-                router.push(`/viewid/${id}`);
+                router.push(`/viewid/${itemid}`);
                 router.refresh();
             } else {
                 throw new Error('Failed to create a Comment!');
@@ -53,6 +45,7 @@ export default function CommentForm({ id, track_id }) {
 
     return (
         <div className="pb-48 w-full">
+        <p>I am {useId}</p>
                     <form onSubmit={handleSubmit} className="flex flex-col gap-8 mt-4">
                         <div className="flex gap-5 flex-col md:flex-row">
                             <div className='flex flex-col gap-1'>

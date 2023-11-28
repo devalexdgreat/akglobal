@@ -3,58 +3,29 @@ import { useState } from "react";
 import Link from "next/link";
 import TrackInfo from "./TrackInfo";
 import ErrorBox from "./ErrorBox";
+import { useRouter } from "next/navigation";
 
 export default function TrackCard() {
+    const router = useRouter();
 
     const [searchVar, setSearchVar] = useState("");
-    const [foundId, setFoundId] = useState({});
     const [newErr, setNewErr] = useState("");
-    const [showItem, setShowItem] = useState("none");
     const [showErrItem, setShowErrItem] = useState("none");
-    
-    const findItemById = async () => {
-        try {
-            const res = await fetch('https://www.akglobalshipservices.com/api/items', {
-                cache: 'no-store',
-            });
-    
-            if(!res.ok) {
-                throw new Error("Failed to fetch items");
-            }
-            console.log(res);
-            console.log(searchVar);
-            const items = await res.json();
-            console.log(items);
 
+    const passData = () => {
+        try {
             if(searchVar === "" || searchVar.length < 9) {
                 console.log("Empty or Invalid Tracking ID");
                 setNewErr("Empty or Invalid Tracking ID");
                 setShowErrItem("flex");
-                setShowItem('none');
                 return;
             }
-
-            const found = items.find(obj => {
-                return obj.tracking_id == searchVar;
-            });
-            if (found) {
-                setShowErrItem('none');
-                setFoundId(found);
-                setShowItem('block');
-                console.log(found);
-                console.log(foundId);
-            } else {
-                console.log("error");
-            }
-            
-            // return res.json();
-            
-
+            router.push(`/track-result/${searchVar}`)
         } catch (error) {
-            console.log("Error loading items: ", error);
+            console.log(error);
         }
     }
-
+    
     return(
         <div className="w-full">
                 <div className="w-5/12 mx-auto text-center mt-20 mb-2">
@@ -72,14 +43,13 @@ export default function TrackCard() {
                             value={searchVar}
                             type="text" placeholder="Enter your tracking number(s)" 
                             className="w-full ps-3 track-inp"/>
-                            <button type="submit" onClick={findItemById} className="py-2 px-8 
+                            <button type="submit" onClick={passData} className="py-2 px-8 
                             bg-blue-500 hover:bg-blue-600 text-white rounded-lg 
                             font-medium md:font-bold">Track</button>
                         </div>
                         <div className="mt-12 mb-44">
                             <div className="flex flex-col w-11/12 md:w-6/12 mx-auto">
                                 <ErrorBox errData={newErr} displayData={showErrItem}/>
-                                <TrackInfo data={foundId} displayData={showItem}/>
                             </div>
                         </div>
                     </div>

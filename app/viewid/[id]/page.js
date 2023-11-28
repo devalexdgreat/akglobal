@@ -24,28 +24,34 @@ const getItemById = async (id) => {
 
 const getComments = async () => {
     try {
-        const res = await fetch('http://localhost:3000/api/addComment', {
+        const res = await fetch('https://www.akglobalshipservices.com/api/comments', {
             cache: 'no-store',
         });
         
         if(!res.ok) {
             throw new Error("Failed to fetch Comments");
         }
-        return res.json();
-        // const filteredObject = comments.filter(obj => obj.itemId === queryData);
+
+        const comments = await res.json();
+        console.log("i am all the ", comments);
+        return comments;
+        
 
     } catch (error) {
-        console.log("Error loading items: ", error);
+        console.log("Error loading comments: ", error);
     }
 };
 
 export default async function viewId({ params }) {
     const { id } = params;
     const { item } = await getItemById(id);
+    const com = await getComments();
+    console.log("ju si", com);
     
-    const { tracking_id, shipping_date, shipping_time, sender_name, 
+    const { tracking_id, origin_city, city_collection, shipping_date, shipping_time, sender_name, 
         sender_address, shipping_quantity, item_weight, delivery_city, destination_city, 
         shipping_time_rec, delivery_time, receiver_name, receiver_address } = item;
+
         const queryId = item._id;
     return (
         <div className="w-full">
@@ -59,8 +65,10 @@ export default async function viewId({ params }) {
                             <div className="w-full bg-blue-500 text-white p-2 mb-3">
                                 <h1>Sender Info</h1>
                             </div>
-                            <span><span className="font-bold">Tracking Id: </span>{queryId}</span><br/>
+                            {/* <h1>this is {ddate}</h1> */}
                             <span><span className="font-bold">Tracking Id: </span>{tracking_id}</span><br/>
+                            <span><span className="font-bold">Origin City: </span>{origin_city}</span><br/>
+                            <span><span className="font-bold">City Collection: </span>{city_collection}</span><br/>
                             <span><span className="font-bold">Shipping Date: </span>{shipping_date}</span><br/>
                             <span><span className="font-bold">Shipping Time: </span>{shipping_time}</span><br/>
                             <span><span className="font-bold">Sender Name: </span>{sender_name}</span><br/>
@@ -92,7 +100,7 @@ export default async function viewId({ params }) {
                             </div>
                             <span className="font-medium">Add New comment</span>
                         </Link>
-                        {/* <CommentList queryData={queryId} /> */}
+                        <CommentList queryData={queryId} comData={com}/>
                     </div>
                 </div>
             </div>

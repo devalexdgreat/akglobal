@@ -6,11 +6,13 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
-export default function EditTopicForm({ id, tracking_id, shipping_date, shipping_time, sender_name, 
+export default function EditTopicForm({ id, tracking_id, origin_city, city_collection, shipping_date, shipping_time, sender_name, 
     sender_address, shipping_quantity, item_weight, delivery_city, destination_city, 
     shipping_time_rec, delivery_time, receiver_name, receiver_address }) {
     
     const [newTracking_id, SetNewTracking_id] = useState(tracking_id);
+    const [newOrigin_city, SetNewOrigin_city] = useState(origin_city);
+    const [newCity_collection, SetNewCity_collection] = useState(city_collection);
     const [newShipping_date, SetNewShipping_date] = useState(shipping_date);
     const [newShipping_time, SetNewShipping_time] = useState(shipping_time);
     const [newSender_name, SetNewSender_name] = useState(sender_name);
@@ -32,7 +34,7 @@ export default function EditTopicForm({ id, tracking_id, shipping_date, shipping
         try {
             const res = await axios
                 .put(`/api/items/${id}`, {
-                    newTracking_id, newShipping_date, newShipping_time, newSender_name, newSender_address, 
+                    newTracking_id, newOrigin_city, newCity_collection, newShipping_date, newShipping_time, newSender_name, newSender_address, 
                     newShipping_quantity, newItem_weight, newDelivery_city, newDestination_city, newShipping_time_rec, 
                     newDelivery_time, newReceiver_name, newReceiver_address
                 })
@@ -85,6 +87,28 @@ export default function EditTopicForm({ id, tracking_id, shipping_date, shipping
                             </div>
                             <div className="flex gap-5 flex-col md:flex-row">
                                 <div className='flex flex-col gap-1'>
+                                    <label>Origin City:</label>
+                                    <input 
+                                    onChange={(e) => SetNewOrigin_city(e.target.value)}
+                                    value={newOrigin_city}
+                                    type='text' placeholder='Enter Destination address' 
+                                    className='w-full border border-black p-3 rounded-lg new-inp'/>
+                                </div>
+                                <div className='flex flex-col gap-1'>
+                                    <label>City Collection:</label>
+                                    <input 
+                                    onChange={(e) => SetNewCity_collection(e.target.value)}
+                                    value={newCity_collection}
+                                    type='text' placeholder='Enter Destination address' 
+                                    className='w-full border border-black p-3 rounded-lg new-inp'/>
+                                </div>
+                            </div> 
+                        </div>
+                        
+
+                        <div className="flex gap-5 flex-col md:flex-row">
+                            <div className="flex gap-5 flex-col md:flex-row">
+                                <div className='flex flex-col gap-1'>
                                     <label>Shipping Time:</label>
                                     <input 
                                     onChange={(e) => SetNewShipping_time(e.target.value)}
@@ -101,10 +125,6 @@ export default function EditTopicForm({ id, tracking_id, shipping_date, shipping
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div>
                             </div> 
-                        </div>
-                        
-
-                        <div className="flex gap-5 flex-col md:flex-row">
                             <div className='flex flex-col gap-1'>
                                 <label>Sender Contact Address:</label>
                                 <input 

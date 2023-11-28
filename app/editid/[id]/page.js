@@ -20,7 +20,7 @@ const getItemById = async (id) => {
 export default async function EditId({ params }) {
     const { id } = params;
     const { item } = await getItemById(id);
-    const { tracking_id, shipping_date, shipping_time, sender_name, 
+    const { tracking_id, origin_city, city_collection, shipping_date, shipping_time, sender_name, 
         sender_address, shipping_quantity, item_weight, delivery_city, destination_city, 
         shipping_time_rec, delivery_time, receiver_name, receiver_address } = item;
 
@@ -31,7 +31,7 @@ export default async function EditId({ params }) {
                 <div className="my-6">
                     <h1 className="text-xl font-medium">Edit / Update Item Details</h1>
                 </div>
-                <EditTopicForm id={id} tracking_id={tracking_id} shipping_date={shipping_date} 
+                <EditTopicForm id={id} tracking_id={tracking_id} origin_city={origin_city} city_collection={city_collection} shipping_date={shipping_date} 
                 shipping_time={shipping_time} sender_name={sender_name} sender_address={sender_address} shipping_quantity={shipping_quantity} 
                 item_weight={item_weight} delivery_city={delivery_city} destination_city={destination_city} shipping_time_rec={shipping_time_rec} 
                 delivery_time={delivery_time} receiver_name={receiver_name} receiver_address={receiver_address} />

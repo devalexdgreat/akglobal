@@ -8,6 +8,8 @@ import AdminNav from "@/components/AdminNav";
 
 export default function CreateId() {
     const [tracking_id, SetTracking_id] = useState(0);
+    const [origin_city, SetOrigin_city] = useState("");
+    const [city_collection, SetCity_collection] = useState("");
     const [shipping_date, SetShipping_date] = useState("");
     const [shipping_time, SetShipping_time] = useState("");
     const [sender_name, SetSender_name] = useState("");
@@ -40,7 +42,7 @@ export default function CreateId() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if(!tracking_id || !shipping_date || !shipping_time || !sender_name || !sender_address || !shipping_quantity
+        if(!tracking_id || !origin_city || !city_collection || !shipping_date || !shipping_time || !sender_name || !sender_address || !shipping_quantity
             || !item_weight || !delivery_city || !destination_city || !shipping_time_rec || !delivery_time 
             || !receiver_name || !receiver_address ) {
             alert('This fields are required!');
@@ -53,7 +55,7 @@ export default function CreateId() {
                 headers: {
                     "Content-type": "application/json",
                 },
-                body: JSON.stringify({ tracking_id, shipping_date, shipping_time, sender_name, 
+                body: JSON.stringify({ tracking_id, origin_city, city_collection, shipping_date, shipping_time, sender_name, 
                     sender_address, shipping_quantity, item_weight, delivery_city, destination_city,
                     shipping_time_rec, delivery_time, receiver_name, receiver_address, }),
             });
@@ -108,6 +110,28 @@ export default function CreateId() {
                             </div>
                             <div className="flex gap-5 flex-col md:flex-row">
                                 <div className='flex flex-col gap-1'>
+                                    <label>Origin City:</label>
+                                    <input 
+                                    onChange={(e) => SetOrigin_city(e.target.value)}
+                                    value={origin_city}
+                                    type='text' placeholder='Enter Destination address' 
+                                    className='w-full border border-black p-3 rounded-lg new-inp'/>
+                                </div>
+                                <div className='flex flex-col gap-1'>
+                                    <label>City Collection:</label>
+                                    <input 
+                                    onChange={(e) => SetCity_collection(e.target.value)}
+                                    value={city_collection}
+                                    type='text' placeholder='Enter Destination address' 
+                                    className='w-full border border-black p-3 rounded-lg new-inp'/>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                        <div className="flex gap-5 flex-col md:flex-row">
+                            <div className="flex gap-5 flex-col md:flex-row">
+                                <div className='flex flex-col gap-1'>
                                     <label>Shipping Time:</label>
                                     <input 
                                     onChange={(e) => SetShipping_time(e.target.value)}
@@ -124,10 +148,6 @@ export default function CreateId() {
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div>
                             </div> 
-                        </div>
-                        
-
-                        <div className="flex gap-5 flex-col md:flex-row">
                             <div className='flex flex-col gap-1'>
                                 <label>Sender Contact Address:</label>
                                 <input 

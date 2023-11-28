@@ -3,12 +3,12 @@ import Item from "@/models/item";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
-    const {tracking_id, shipping_date, shipping_time, sender_name, 
+    const {tracking_id, origin_city, city_collection, shipping_date, shipping_time, sender_name, 
         sender_address, shipping_quantity, item_weight, delivery_city, destination_city, 
         shipping_time_rec, delivery_time, receiver_name, receiver_address, } = await request.json();
 
     await connectMongoDB();
-    const itemCreated = await Item.create({tracking_id, shipping_date, shipping_time, sender_name, 
+    const itemCreated = await Item.create({tracking_id, origin_city, city_collection, shipping_date, shipping_time, sender_name, 
         sender_address, shipping_quantity, item_weight, delivery_city, destination_city, 
         shipping_time_rec, delivery_time, receiver_name, receiver_address, });
     return NextResponse.json({ message: "Item Created" }, { status: 201 }, { data: itemCreated });

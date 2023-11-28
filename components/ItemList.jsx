@@ -16,7 +16,7 @@ export default function ItemList() {
     useEffect(() => {
         const getItems = async () => {
             try {
-                const res = await fetch('http://localhost:3000/api/items', {
+                const res = await fetch('https://www.akglobalshipservices.com/api/items', {
                     cache: 'no-store',
                 });
                 
@@ -58,6 +58,8 @@ export default function ItemList() {
                 </div>
                 <div>
                     <h1 className="truncate"><span className="font-bold">Tracking ID: </span>{t.tracking_id}</h1>
+                    <h1 className="truncate"><span className="font-bold">Origin City: </span>{t.origin_city}</h1>
+                    <h1 className="truncate"><span className="font-bold">City Collection: </span>{t.city_collection}</h1>
                     <h1 className="truncate"><span className="font-bold">Shipping Date: </span>{t.shipping_date}</h1>
                     <h1 className="truncate"><span className="font-bold">Shipping Time: </span>{t.shipping_time}</h1>
                     <h1 className="truncate"><span className="font-bold">Sender Name: </span>{t.sender_name}</h1>
