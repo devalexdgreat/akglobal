@@ -32,7 +32,7 @@ export default async function EditCom({ params }) {
         <div className="w-full">
             <AdminNav />
             <div className="w-11/12 mx-auto">
-                <h1 className='text-xl font-bold'>Edit Shipping Log</h1>
+                <h1 className='text-xl font-bold mt-6'>Edit Shipping Log</h1>
                 <EditComForm id={id} itemid={itemid} ddate={ddate} dtime={dtime} dquote={dquote} dcomment={dcomment} />
             </div>
         </div>

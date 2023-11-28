@@ -8,7 +8,7 @@ export default function Createcom({ params }) {
         <div className='w-full'>
             <AdminNav />
             <div className='w-11/12 mx-auto'>
-                <h1 className='text-xl font-bold'>Create New Shipping Log</h1>
+                <h1 className='text-xl font-bold mt-6'>Create New Shipping Log</h1>
                 <CommentForm useId={id}/>
             </div>
         </div>
