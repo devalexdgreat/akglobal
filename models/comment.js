@@ -2,9 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 const commentSchema = new Schema(
     {
-        itemId: {
-            type: mongoose.Schema.Types.ObjectId, ref: "Item",
-        },
+        itemid: String,
         ddate: String,
         dtime: String,
         dquote: String,

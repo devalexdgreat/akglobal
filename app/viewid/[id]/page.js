@@ -22,17 +22,36 @@ const getItemById = async (id) => {
     }
 }
 
+const getComments = async () => {
+    try {
+        const res = await fetch('http://localhost:3000/api/addComment', {
+            cache: 'no-store',
+        });
+        
+        if(!res.ok) {
+            throw new Error("Failed to fetch Comments");
+        }
+        return res.json();
+        // const filteredObject = comments.filter(obj => obj.itemId === queryData);
+
+    } catch (error) {
+        console.log("Error loading items: ", error);
+    }
+};
+
 export default async function viewId({ params }) {
     const { id } = params;
     const { item } = await getItemById(id);
+    
     const { tracking_id, shipping_date, shipping_time, sender_name, 
         sender_address, shipping_quantity, item_weight, delivery_city, destination_city, 
         shipping_time_rec, delivery_time, receiver_name, receiver_address } = item;
+        const queryId = item._id;
     return (
         <div className="w-full">
             <AdminNav />
-            <div className="w-full mt-10 mb-32">
-                <div className="w-8/12 p-5 shadow mx-auto md:mr-0 md:ml-12">
+            <div className="w-full mt-10 mb-16">
+                <div className="w-full md:w-8/12 p-5 shadow mx-auto md:mr-0 md:ml-12">
                     <h1 className="text-xl font-bold mb-4">More details</h1>
 
                     <div className="w-full flex gap-8 flex-col md:flex-row">
@@ -40,6 +59,7 @@ export default async function viewId({ params }) {
                             <div className="w-full bg-blue-500 text-white p-2 mb-3">
                                 <h1>Sender Info</h1>
                             </div>
+                            <span><span className="font-bold">Tracking Id: </span>{queryId}</span><br/>
                             <span><span className="font-bold">Tracking Id: </span>{tracking_id}</span><br/>
                             <span><span className="font-bold">Shipping Date: </span>{shipping_date}</span><br/>
                             <span><span className="font-bold">Shipping Time: </span>{shipping_time}</span><br/>
@@ -62,17 +82,17 @@ export default async function viewId({ params }) {
                     </div>
                 </div>
                 
-                <div className="w-8/12 mt-12 p-5 shadow mx-auto md:mr-0 md:ml-12">
+                <div className="w-11/12 mx-auto mt-12">
                     <h1 className="font-bold text-xl">Shipping History</h1>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 pb-52 relative items-grid">
-                        <Link href={`/createcomment/${id}`} className="flex items-center justify-center gap-2 hover:bg-slate-100 rounded-lg
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mt-12 pb-52 relative items-grid">
+                        <Link href={`/createcom/${id}`} className="flex items-center justify-center gap-2 hover:bg-slate-100 rounded-lg
                         py-2">
                             <div className="rounded-full flex items-center justify-center h-12 w-12 bg-blue-500 hover:bg-blue-600">
                                 <Image src={addIcon} className="h-5/6 w-10/12" alt="" />
                             </div>
                             <span className="font-medium">Add New comment</span>
                         </Link>
-                        <CommentList />
+                        {/* <CommentList queryData={queryId} /> */}
                     </div>
                 </div>
             </div>

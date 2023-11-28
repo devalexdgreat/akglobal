@@ -19,14 +19,14 @@ export default function CommentForm({ id, track_id }) {
             alert('This fields are required!');
             return;
         }
-
+        console.log(track_id)
         try {
             const res = await fetch('/api/addComment', {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json",
                 },
-                body: JSON.stringify({ track_id, ddate, dtime, dquote, dcomment }),
+                body: JSON.stringify({ id, ddate, dtime, dquote, dcomment }),
             });
 
             // const res = await axios.post(`/api/comments`, {
@@ -41,7 +41,7 @@ export default function CommentForm({ id, track_id }) {
             if (res.ok) {
                 const data = await res.json();
                 console.log("Comment Created: ", data);
-                router.push(`/viewid/${track_id}`);
+                router.push(`/viewid/${id}`);
                 router.refresh();
             } else {
                 throw new Error('Failed to create a Comment!');
@@ -52,7 +52,7 @@ export default function CommentForm({ id, track_id }) {
     };
 
     return (
-        <div className="pb-48 bg-green-300 w-full">
+        <div className="pb-48 w-full">
                     <form onSubmit={handleSubmit} className="flex flex-col gap-8 mt-4">
                         <div className="flex gap-5 flex-col md:flex-row">
                             <div className='flex flex-col gap-1'>
