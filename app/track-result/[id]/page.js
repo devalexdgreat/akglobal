@@ -48,6 +48,11 @@ const getComments = async () => {
 };
 
 export default async function TrackResult({ params }) {
+
+    // const hideDisplay = () => {
+
+    // }
+
     const { id } = params;
     const askedId = id;
     const allItems = await getItems();

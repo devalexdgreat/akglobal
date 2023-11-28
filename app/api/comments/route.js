@@ -15,3 +15,10 @@ export async function GET() {
     const comments = await Comment.find();
     return NextResponse.json( comments );
 }
+
+export async function DELETE(request) {
+    const id = request.nextUrl.searchParams.get("id");
+    await connectMongoDB();
+    await Comment.findByIdAndDelete(id);
+    return NextResponse.json({ message: "Log Deleted" }, { status: 200 });
+}
