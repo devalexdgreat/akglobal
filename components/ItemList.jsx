@@ -5,7 +5,6 @@ import editIcon from '@/public/edit.png';
 import moreIcon from '@/public/more.png';
 import Image from "next/image";
 import DeleteBtn from "./DeleteBtn";
-import { useEffect, useState } from "react";
 
 
 

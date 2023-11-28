@@ -28,8 +28,8 @@ export default function TrackCard() {
     
     return(
         <div className="w-full">
-                <div className="w-5/12 mx-auto text-center mt-20 mb-2">
-                    <h1 className="text-2xl md:text-3xl">
+                <div className="w-10/12 md:w-5/12 mx-auto text-center mt-20 mb-2">
+                    <h1 className="text-2xl md:text-3xl font-medium">
                         Check the location and status of your shipments.
                     </h1>
                 </div>

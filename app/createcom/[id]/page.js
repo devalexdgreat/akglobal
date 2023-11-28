@@ -1,7 +1,5 @@
-"use client";
 import AdminNav from '@/components/AdminNav';
 import CommentForm from '@/components/CommentForm';
-import { useSearchParams } from 'next/navigation'
 
 export default function Createcom({ params }) {
     const { id } = params;
