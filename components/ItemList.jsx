@@ -9,38 +9,11 @@ import { useEffect, useState } from "react";
 
 
 
-export default function ItemList() {
-
-    const [itemsFound, setItemsFound] = useState([]);
-
-    useEffect(() => {
-        const getItems = async () => {
-            try {
-                const res = await fetch('https://www.akglobalshipservices.com/api/items', {
-                    cache: 'no-store',
-                });
-                
-                if(!res.ok) {
-                    throw new Error("Failed to fetch items");
-                }
-                
-                const items = await res.json();
-                console.log(items);
-    
-                setItemsFound(items);
-                return items;
-            } catch (error) {
-                console.log("Error loading items: ", error);
-            }
-        };
-        getItems();
-    }, [])
-
-   
+export default function ItemList({ itemsData }) {
 
     return(
         <>
-            {itemsFound.map((t) => (
+            {itemsData.map((t) => (
             <div key={t._id} className="border border-blue-500 rounded-lg p-4 relative 
             hover:bg-slate-100 admin-item group/item">
                 <div className="absolute flex md:invisible group-hover/item:visible 
