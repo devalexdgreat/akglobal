@@ -40,8 +40,8 @@ export default function ItemList({ itemsData }) {
                     <h1 className="truncate"><span className="font-bold">Total Weight: </span>{t.item_weight}</h1>
                     <h1 className="truncate"><span className="font-bold">Delivery City: </span>{t.delivery_city}</h1>
                     <h1 className="truncate"><span className="font-bold">Destination City: </span>{t.destination_city}</h1>
-                    <h1 className="truncate"><span className="font-bold">Shipping Time(Rec): </span>{t.shipping_time_rec}</h1>
-                    <h1 className="truncate"><span className="font-bold">Delivery Time: </span>{t.delivery_time}</h1>
+                    <h1 className="truncate"><span className="font-bold">Shipping Date: </span>{t.shipping_time_rec}</h1>
+                    <h1 className="truncate"><span className="font-bold">Delivery Date: </span>{t.delivery_time}</h1>
                     <h1 className="truncate"><span className="font-bold">Recipient Name: </span>{t.receiver_name}</h1>
                     <h1 className="truncate"><span className="font-bold">Recipient Address: </span>{t.receiver_address}</h1>
                 </div>

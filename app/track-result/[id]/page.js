@@ -242,7 +242,7 @@ export default async function TrackResult({ params }) {
                                                 <Image src={calIcon} className="" alt="" />
                                             </div>
                                             <div className="flex flex-col gap-1">
-                                                <span>Shipping Time</span>
+                                                <span>Shipping Date</span>
                                                 <span className="font-bold">
                                                     {matchedItem[0].delivery_time}
                                                 </span>
@@ -253,7 +253,7 @@ export default async function TrackResult({ params }) {
                                                 <Image src={timeIcon} className="" alt="" />
                                             </div>
                                             <div className="flex flex-col gap-1">
-                                                <span>Delivery Time</span>
+                                                <span>Delivery Date</span>
                                                 <span className="font-bold">
                                                     {matchedItem[0].delivery_time}
                                                 </span>

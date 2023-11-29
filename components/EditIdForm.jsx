@@ -91,7 +91,7 @@ export default function EditTopicForm({ id, tracking_id, origin_city, city_colle
                                     <input 
                                     onChange={(e) => SetNewOrigin_city(e.target.value)}
                                     value={newOrigin_city}
-                                    type='text' placeholder='Enter Destination address' 
+                                    type='text' placeholder='Enter Origin City' 
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div>
                                 <div className='flex flex-col gap-1'>
@@ -99,7 +99,7 @@ export default function EditTopicForm({ id, tracking_id, origin_city, city_colle
                                     <input 
                                     onChange={(e) => SetNewCity_collection(e.target.value)}
                                     value={newCity_collection}
-                                    type='text' placeholder='Enter Destination address' 
+                                    type='text' placeholder='Enter City Collection' 
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div>
                             </div> 
@@ -113,7 +113,7 @@ export default function EditTopicForm({ id, tracking_id, origin_city, city_colle
                                     <input 
                                     onChange={(e) => SetNewShipping_time(e.target.value)}
                                     value={newShipping_time}
-                                    type='text' placeholder='Enter Destination address' 
+                                    type='text' placeholder='Enter Shipping Time' 
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div>
                                 <div className='flex flex-col gap-1'>
@@ -121,7 +121,7 @@ export default function EditTopicForm({ id, tracking_id, origin_city, city_colle
                                     <input 
                                     onChange={(e) => SetNewSender_name(e.target.value)}
                                     value={newSender_name}
-                                    type='text' placeholder='Enter Destination address' 
+                                    type='text' placeholder='Enter Sender Name' 
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div>
                             </div> 
@@ -130,7 +130,7 @@ export default function EditTopicForm({ id, tracking_id, origin_city, city_colle
                                 <input 
                                 onChange={(e) => SetNewSender_address(e.target.value)}
                                 value={newSender_address}
-                                type='text' placeholder='Enter Destination address' 
+                                type='text' placeholder='Enter Sender address' 
                                 className='w-full border border-black p-3 rounded-lg new-inp'/>
                             </div>
                             <div className='flex flex-col gap-1'>
@@ -159,7 +159,7 @@ export default function EditTopicForm({ id, tracking_id, origin_city, city_colle
                                     <input 
                                     onChange={(e) => SetNewDelivery_city(e.target.value)}
                                     value={newDelivery_city}
-                                    type='text' placeholder='Enter Item name' 
+                                    type='text' placeholder='Enter Delivery City' 
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div>
                                 <div className='flex flex-col gap-1'>
@@ -167,25 +167,25 @@ export default function EditTopicForm({ id, tracking_id, origin_city, city_colle
                                     <input 
                                     onChange={(e) => SetNewDestination_city(e.target.value)}
                                     value={newDestination_city}
-                                    type='text' placeholder='Enter Item description' 
+                                    type='text' placeholder='Enter Destination City' 
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div>
                             </div>
                             <div className="flex gap-5 flex-col md:flex-row">
                                 <div className='flex flex-col gap-1'>
-                                    <label>Shipping Time</label>
+                                    <label>Shipping Date</label>
                                     <input 
                                     onChange={(e) => SetNewShipping_time_rec(e.target.value)}
                                     value={newShipping_time_rec}
-                                    type='text' placeholder='Enter address shipped from' 
+                                    type='text' placeholder='Enter Shipping Date' 
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div>
                                 <div className='flex flex-col gap-1'>
-                                    <label>Delivery Time:</label>
+                                    <label>Delivery Date:</label>
                                     <input 
                                     onChange={(e) => SetNewDelivery_time(e.target.value)}
                                     value={newDelivery_time}
-                                    type='text' placeholder='Enter Destination address' 
+                                    type='text' placeholder='Enter Delivery Date' 
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div>
                             </div> 
@@ -198,7 +198,7 @@ export default function EditTopicForm({ id, tracking_id, origin_city, city_colle
                                     <input 
                                     onChange={(e) => SetNewReceiver_name(e.target.value)}
                                     value={newReceiver_name}
-                                    type='text' placeholder='Enter Destination address' 
+                                    type='text' placeholder='Enter Recipient Name' 
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div>
                                 <div className='flex flex-col gap-1'>
@@ -206,7 +206,7 @@ export default function EditTopicForm({ id, tracking_id, origin_city, city_colle
                                     <input 
                                     onChange={(e) => SetNewReceiver_address(e.target.value)}
                                     value={newReceiver_address}
-                                    type='text' placeholder='Enter Destination address' 
+                                    type='text' placeholder='Enter Recipient Address' 
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div> 
                             </div> 

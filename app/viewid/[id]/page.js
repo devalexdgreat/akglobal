@@ -82,8 +82,8 @@ export default async function viewId({ params }) {
                             </div>
                             <span><span className="font-bold">Delivery City: </span>{delivery_city}</span><br/>
                             <span><span className="font-bold">Destination City: </span>{destination_city}</span><br/>
-                            <span><span className="font-bold">Shipping Time: </span>{shipping_time_rec}</span><br/>
-                            <span><span className="font-bold">Delivery Time: </span>{delivery_time}</span><br/>
+                            <span><span className="font-bold">Shipping Date: </span>{shipping_time_rec}</span><br/>
+                            <span><span className="font-bold">Delivery Date: </span>{delivery_time}</span><br/>
                             <span><span className="font-bold">Receiver Name: </span>{receiver_name}</span><br/>
                             <span><span className="font-bold">Receiver Address: </span>{receiver_address}</span><br/> 
                         </div>

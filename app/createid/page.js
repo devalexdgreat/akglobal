@@ -104,7 +104,7 @@ export default function CreateId() {
                                     <input 
                                     onChange={(e) => SetShipping_date(e.target.value)}
                                     value={shipping_date}
-                                    type='date' placeholder='Enter Date' 
+                                    type='date' placeholder='Enter Shipping Date' 
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div>
                             </div>
@@ -114,7 +114,7 @@ export default function CreateId() {
                                     <input 
                                     onChange={(e) => SetOrigin_city(e.target.value)}
                                     value={origin_city}
-                                    type='text' placeholder='Enter Destination address' 
+                                    type='text' placeholder='Enter Origin City' 
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div>
                                 <div className='flex flex-col gap-1'>
@@ -122,7 +122,7 @@ export default function CreateId() {
                                     <input 
                                     onChange={(e) => SetCity_collection(e.target.value)}
                                     value={city_collection}
-                                    type='text' placeholder='Enter Destination address' 
+                                    type='text' placeholder='Enter City Collection' 
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div>
                             </div>
@@ -136,7 +136,7 @@ export default function CreateId() {
                                     <input 
                                     onChange={(e) => SetShipping_time(e.target.value)}
                                     value={shipping_time}
-                                    type='text' placeholder='Enter Destination address' 
+                                    type='text' placeholder='Enter Shipping Time' 
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div>
                                 <div className='flex flex-col gap-1'>
@@ -144,7 +144,7 @@ export default function CreateId() {
                                     <input 
                                     onChange={(e) => SetSender_name(e.target.value)}
                                     value={sender_name}
-                                    type='text' placeholder='Enter Destination address' 
+                                    type='text' placeholder='Enter Sender Name' 
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div>
                             </div> 
@@ -153,7 +153,7 @@ export default function CreateId() {
                                 <input 
                                 onChange={(e) => SetSender_address(e.target.value)}
                                 value={sender_address}
-                                type='text' placeholder='Enter Destination address' 
+                                type='text' placeholder='Enter Sender address' 
                                 className='w-full border border-black p-3 rounded-lg new-inp'/>
                             </div>
                             <div className='flex flex-col gap-1'>
@@ -182,7 +182,7 @@ export default function CreateId() {
                                     <input 
                                     onChange={(e) => SetDelivery_city(e.target.value)}
                                     value={delivery_city}
-                                    type='text' placeholder='Enter Item name' 
+                                    type='text' placeholder='Enter Delivery City' 
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div>
                                 <div className='flex flex-col gap-1'>
@@ -190,25 +190,25 @@ export default function CreateId() {
                                     <input 
                                     onChange={(e) => SetDestination_city(e.target.value)}
                                     value={destination_city}
-                                    type='text' placeholder='Enter Item description' 
+                                    type='text' placeholder='Enter Destination City' 
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div>
                             </div>
                             <div className="flex gap-5 flex-col md:flex-row">
                                 <div className='flex flex-col gap-1'>
-                                    <label>Shipping Time</label>
+                                    <label>Shipping Date</label>
                                     <input 
                                     onChange={(e) => SetShipping_time_rec(e.target.value)}
                                     value={shipping_time_rec}
-                                    type='text' placeholder='Enter address shipped from' 
+                                    type='text' placeholder='Enter Shipping Date' 
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div>
                                 <div className='flex flex-col gap-1'>
-                                    <label>Delivery Time:</label>
+                                    <label>Delivery Date:</label>
                                     <input 
                                     onChange={(e) => SetDelivery_time(e.target.value)}
                                     value={delivery_time}
-                                    type='text' placeholder='Enter Destination address' 
+                                    type='text' placeholder='Enter Delivery Date' 
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div>
                             </div> 
@@ -221,7 +221,7 @@ export default function CreateId() {
                                     <input 
                                     onChange={(e) => SetReceiver_name(e.target.value)}
                                     value={receiver_name}
-                                    type='text' placeholder='Enter Destination address' 
+                                    type='text' placeholder='Enter Recipient Name' 
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div>
                                 <div className='flex flex-col gap-1'>
@@ -229,7 +229,7 @@ export default function CreateId() {
                                     <input 
                                     onChange={(e) => SetReceiver_address(e.target.value)}
                                     value={receiver_address}
-                                    type='text' placeholder='Enter Destination address' 
+                                    type='text' placeholder='Enter Recipient address' 
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div> 
                             </div> 
