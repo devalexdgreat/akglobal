@@ -1,8 +1,8 @@
-import { Inter } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from './Providers';
 
-const inter = Inter({ subsets: ['latin'] })
+const font = Poppins({ subsets: ['latin'], weight: "300" });
 
 export const metadata = {
   title: 'Ak Global - Track your Shipment',
@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
       <head>
         <link rel='icon' href='/favicon.png'/>
       </head>
-      <body className={inter.className}>
+      <body className={font.className}>
         <div className='relative min-h-screen'>
           <AuthProvider>
             {children}

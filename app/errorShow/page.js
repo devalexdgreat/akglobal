@@ -16,7 +16,7 @@ export default function ErrShow() {
                     <h1 className='text-white font-bold'>Error Not Found (: </h1>
                 </div>
                 <div>
-                    <Link href={"/"} className='bg-blue-500 hover:bg-blue-600 text-white py-2 px-4
+                    <Link href={"/track"} className='bg-blue-500 hover:bg-blue-600 text-white py-2 px-4
                     rounded-lg'>Try Again</Link>
                 </div>
             </div>
