@@ -14,20 +14,20 @@ export default function Navbar() {
     };
 
     return (
-        <div className="w-full bg-blue-500">
+        <div className="w-full bg-white text-black">
             <div className="w-10/12 md:w-11/12 mx-auto h-20 flex justify-between items-center text-white">
                 <Link className="font-medium text-lg gap-1 flex items-center" href={'/'}>
                     <Image src={Logo} alt="" className="h-10 w-10" />
-                    <span className="font-bold text-xl hidden md:flex flex-col">
+                    <span className="font-bold text-black text-xl hidden md:flex flex-col">
                         <span>AK GLOBAL</span><span>SHIP SERVICES</span>
                     </span>
                 </Link>
                 
                 <div className="hidden gap-8 md:flex items-center">
-                    <Link className="bg-white text-blue-500 px-6 py-2 rounded-lg hover:bg-slate-100" 
+                    <Link className="bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800" 
                     href={'/login'}>Login</Link>
-                    <Link className="border border-white px-6 py-2 rounded-lg hover:bg-white 
-                    hover:text-blue-500" href={'/'}>Track Your Shipment</Link>
+                    <Link className="border border-black px-6 py-2 rounded-lg hover:bg-white 
+                    hover:text-blue-500 text-black" href={'/'}>Track Your Shipment</Link>
                 </div>
                 
                 <div onClick={toggleMenu} className="block md:hidden text-lg font-medium border-b-2 border-white">

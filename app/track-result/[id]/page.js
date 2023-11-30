@@ -9,6 +9,9 @@ import conIcon from "@/public/contact.png";
 import weightIcon from "@/public/ib.png";
 import sizeIcon from "@/public/size.png";
 import { redirect } from 'next/navigation';
+import HomeNav from "@/components/HomeNav";
+import Footer from "@/components/Footer";
+import CtaButton from "@/components/CtaButton";
 
 const getItems = async () => {
     try {
@@ -77,7 +80,8 @@ export default async function TrackResult({ params }) {
 
     return (
         <div className="w-full">
-            <Navbar />
+            <HomeNav />
+            <CtaButton />
             <div className="w-full pt-24">
                 <div className="w-11/12 mx-auto flex gap-8 flex-col md:flex-row">
                     <div className="w-full md:w-7/12 flex flex-col gap-8">
@@ -324,6 +328,7 @@ export default async function TrackResult({ params }) {
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }

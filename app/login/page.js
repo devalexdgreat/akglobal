@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import { authOptions } from '../api/auth/[...nextauth]/route';
-import Navbar from '@/components/Navbar';
+import HomeNav from '@/components/HomeNav';
 
 export default async function Login() {
     const session = await getServerSession(authOptions);
@@ -15,9 +15,8 @@ export default async function Login() {
 
     return(
         <>
-        <Navbar />
+        <HomeNav />
         <div className="w-full login-wrap flex items-center">
-            
             <LoginForm />
         </div>
         </>

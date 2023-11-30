@@ -31,12 +31,14 @@ import logoNin from '@/public/logo9.jpg';
 import logoTen from '@/public/logo10.png';
 import logoEle from '@/public/logo11.jpg';
 import logoTwe from '@/public/logo12.jpg';
+import CtaButton from '@/components/CtaButton'
 
 export default function Home() {
 
   return (
-    <main className="w-full bg-[#E7EEF6]">
+    <main className="w-full bg-[#E7EEF6] relative">
       <HomeNav />
+      <CtaButton />
       <div className='w-full h-screen'>
         <div className='w-full mx-auto h-5/6 flex flex-col md:justify-center md:items-center'>
           <div className='text-center w-full h-full flex items-center justify-center heroBanner'>
@@ -81,10 +83,6 @@ export default function Home() {
           <h1 className='text-center font-bold text-2xl'>Our Motto:</h1>
           <span className='text-center bg-blue-500 py-1 px-1 w-11/12 md:w-4/12 mx-auto text-white
           font-bold text-2xl md:text-3xl'>WE KEEP OUR PROMISES</span>
-          <span className='w-11/12 md:w-4/12 mx-auto text-center flex flex-col mt-6'>
-            <span className='text-xl font-bold'>Morten Olesen</span>
-            <span className='font-semibold text-blue-400'>Owner</span>
-          </span>
         </div>
       </div>
 
@@ -93,7 +91,7 @@ export default function Home() {
           <div className='w-full md:w-6/12 mx-auto text-center'>
             <h1 className='text-xl md:text-3xl font-bold text-blue-500'>Services</h1>
           </div>
-          <div className='grid grid-cols-2 gap-8 mt-12'>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-8 mt-12'>
             <div className=''>
               <Image src={planeIcon} alt='' className='w-full h-full hover:scale-110 duration-700' />
             </div>
@@ -153,7 +151,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className='w-full bg-white'>
+      <div className='w-full bg-white pb-12'>
         <div className='w-11/12 mx-auto pt-12'>
           <div className='w-full md:w-8/12 mx-auto my-12'>
             <h1 className='font-bold text-xl md:text-3xl text-blue-500 text-center'>Networks & Accreditations</h1>

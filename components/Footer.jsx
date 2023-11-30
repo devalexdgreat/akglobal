@@ -5,7 +5,7 @@ import Logo from "@/public/logo.png";
 
 export default function Footer() {
     return (
-        <div className="w-full mt-12 bg-black pt-12 text-white">
+        <div className="w-full bg-black pt-12 text-white">
             <div className="w-11/12 md:w-11/12 mx-auto">
                 <div className="w-full flex flex-col gap-1 md:gap-0 md:flex-row items-center 
                 text-center justify-center md:justify-between">

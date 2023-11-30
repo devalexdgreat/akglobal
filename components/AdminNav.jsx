@@ -18,11 +18,11 @@ export default function AdminNav() {
     };
 
     return (
-        <div className="w-full bg-blue-500">
+        <div className="w-full bg-white text-black">
             <div className="w-10/12 md:w-11/12 mx-auto h-20 flex justify-between items-center text-white">
                 <Link className="font-medium text-lg gap-1 flex items-center" href={'/'}>
                     <Image src={Logo} alt="" className="h-10 w-10" />
-                    <span className="font-bold text-xl hidden md:flex flex-col">
+                    <span className="font-bold text-black text-xl hidden md:flex flex-col">
                         <span>AK GLOBAL</span><span>SHIP SERVICES</span>
                     </span>
                 </Link>
@@ -33,18 +33,19 @@ export default function AdminNav() {
                         <Link href={"/admin"} className="bg-black hover:bg-slate-900 text-white py-2 px-6
                         rounded-lg">Back to Admin</Link>
                     </div>
-                    <div className="rounded-full bg-white hover:bg-slate-200 h-12 w-12 
+                    <div className="rounded-full bg-white border border-black hover:bg-slate-200 h-12 w-12 
                         flex items-center justify-center text-black">
                         <span className="font-medium text-2xl text-center flex items-center
                         justify-center uppercase">{session?.user?.name.charAt(0)}</span>
                     </div>
                 </div>
-                <div onClick={toggleMenu} className="block md:hidden text-lg font-medium border-b-2 border-white">
+                <div onClick={toggleMenu} className="block md:hidden text-lg text-black font-medium 
+                hover:cursor-pointer border-b-2 border-black">
                     MENU
                 </div>
             </div>
             {open && (
-                <div className="w-full bg-blue-500 border-t text-white md:hidden">
+                <div className="w-full bg-white border-t text-white md:hidden">
                     <div className="w-full mx-auto flex">
                     <div className="w-11/12 mx-auto justify-between py-3 gap-8 flex items-center">
                         <div className="flex gap-3">
@@ -53,7 +54,7 @@ export default function AdminNav() {
                             <Link href={"/admin"} className="bg-black hover:bg-slate-900 text-white py-2 px-6
                             rounded-lg">Back to Admin</Link>
                         </div>
-                        <div className="rounded-full bg-white hover:bg-slate-200 h-12 w-12 
+                        <div className="rounded-full bg-white border border-black hover:bg-slate-200 h-12 w-12 
                             flex items-center justify-center text-black">
                             <span className="font-medium text-2xl text-center flex items-center
                             justify-center uppercase">{session?.user?.name.charAt(0)}</span>
