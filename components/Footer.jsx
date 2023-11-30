@@ -29,7 +29,9 @@ export default function Footer() {
                     </div>
                 </div>
                 <div className="w-full flex justify-center mt-12 py-5">
-                    <span>2023 &copy; AK GLOBAL SHIP SERVICES. All rights reserved.</span>
+                    <span className="text-center">
+                        2023 &copy; AK GLOBAL SHIP SERVICES. All rights reserved.
+                    </span>
                 </div>
             </div>
         </div>

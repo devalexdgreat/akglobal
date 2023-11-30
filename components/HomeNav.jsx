@@ -16,11 +16,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const products = [
-  { name: 'Air Freight', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
-  { name: 'Ocean Freight', description: 'Speak directly to your customers', href: '#', icon: CursorArrowRaysIcon },
-  { name: 'Project & Heavy Lift Cargo', description: 'Your customers’ data will be safe and secure', href: '#', icon: FingerPrintIcon },
+  { name: 'Air Freight', description: 'Get a better understanding of your traffic', href: '/air', icon: ChartPieIcon },
+  { name: 'Ocean Freight', description: 'Speak directly to your customers', href: '/ocean', icon: CursorArrowRaysIcon },
+  { name: 'Project & Heavy Lift Cargo', description: 'Your customers’ data will be safe and secure', href: '/project', icon: FingerPrintIcon },
   { name: 'Customs Brokerage Services', description: 'Connect with third-party tools', href: '#', icon: SquaresPlusIcon },
-  { name: 'Boutique Warehousing & Distribution / Trucking', description: 'Build strategic funnels that will convert', href: '#', icon: ArrowPathIcon },
+  { name: 'Boutique Warehousing & Distribution / Trucking', description: 'Build strategic funnels that will convert', href: '/boutique', icon: ArrowPathIcon },
   { name: 'US Government Contract / Services', description: 'Build strategic funnels that will convert', href: '#', icon: ArrowPathIcon },
   { name: 'Wine & Spirits', description: 'Build strategic funnels that will convert', href: '#', icon: ArrowPathIcon },
   { name: 'Dangerous Goods', description: 'Build strategic funnels that will convert', href: '#', icon: ArrowPathIcon },

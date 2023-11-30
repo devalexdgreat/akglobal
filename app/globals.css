@@ -26,3 +26,27 @@
     background-size: cover;
     background-position: center;
 }
+
+.airBanner {
+    background-image: url('../public/air_header.jpg');
+    background-size: cover;
+    background-position: bottom;
+}
+
+.oceanBanner {
+    background-image: url('../public/ocean_header.jpg');
+    background-size: cover;
+    background-position: bottom;
+}
+
+.pjxBanner {
+    background-image: url('../public/project_header.jpg');
+    background-size: cover;
+    background-position: bottom;
+}
+
+.boutiqueBanner {
+    background-image: url('../public/boutique_header.jpg');
+    background-size: cover;
+    background-position: bottom;
+}
