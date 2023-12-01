@@ -32,6 +32,7 @@ import logoTen from '@/public/logo10.png';
 import logoEle from '@/public/logo11.jpg';
 import logoTwe from '@/public/logo12.jpg';
 import CtaButton from '@/components/CtaButton'
+import Link from 'next/link'
 
 export default function Home() {
 
@@ -92,30 +93,30 @@ export default function Home() {
             <h1 className='text-xl md:text-3xl font-bold text-blue-500'>Services</h1>
           </div>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-8 mt-12'>
-            <div className=''>
+            <Link href={'/air'} className=''>
               <Image src={planeIcon} alt='' className='w-full h-full hover:scale-110 duration-700' />
-            </div>
-            <div className=''>
+            </Link>
+            <Link href={'/ocean'} className=''>
               <Image src={shipIcon} alt='' className='w-full h-full hover:scale-110 duration-700' />
-            </div>
-            <div className=''>
+            </Link>
+            <Link href={'/project'} className=''>
               <Image src={pjxIcon} alt='' className='w-full h-full hover:scale-110 duration-700' />
-            </div>
-            <div className=''>
+            </Link>
+            <Link href={'/customs'} className=''>
               <Image src={customIcon} alt='' className='w-full h-full hover:scale-110 duration-700' />
-            </div>
-            <div className=''>
+            </Link>
+            <Link href={'/boutique'} className=''>
               <Image src={boutiqueIcon} alt='' className='w-full h-full hover:scale-110 duration-700' />
-            </div>
-            <div className=''>
+            </Link>
+            {/* <div className=''>
               <Image src={contractIcon} alt='' className='w-full h-full hover:scale-110 duration-700' />
-            </div>
-            <div className=''>
+            </div> */}
+            <Link href={'/wine'} className=''>
               <Image src={wineIcon} alt='' className='w-full h-full hover:scale-110 duration-700' />
-            </div>
-            <div className=''>
+            </Link>
+            <Link href={'/dangerous-goods'} className=''>
               <Image src={goodIcon} alt='' className='w-full h-full hover:scale-110 duration-700' />
-            </div>
+            </Link>
           </div>
         </div>
       </div>

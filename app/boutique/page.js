@@ -2,7 +2,7 @@ import CtaButton from "@/components/CtaButton";
 import Footer from "@/components/Footer";
 import HomeNav from "@/components/HomeNav";
 
-export default function ProjectPage() {
+export default function BoutiquePage() {
     return (
         <div className="w-full">
             <HomeNav />

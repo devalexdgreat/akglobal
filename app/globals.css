@@ -63,6 +63,18 @@
     background-position: bottom;
 }
 
+.wineBanner {
+    background-image: url('../public/wine_header.jpg');
+    background-size: cover;
+    background-position: bottom;
+}
+
+.dangerBanner {
+    background-image: url('../public/dangerous_header.jpg');
+    background-size: cover;
+    background-position: bottom;
+}
+
 ul {
     list-style-type: disc;
 }

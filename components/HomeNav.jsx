@@ -21,9 +21,8 @@ const products = [
   { name: 'Project & Heavy Lift Cargo', href: '/project'},
   { name: 'Customs Brokerage Services', href: '/customs'},
   { name: 'Boutique Warehousing & Distribution / Trucking', href: '/boutique'},
-  { name: 'US Government Contract / Services', href: '/usa-contracts' },
   { name: 'Wine & Spirits', href: '/wine'},
-  { name: 'Dangerous Goods', href: '/dangerous'},
+  { name: 'Dangerous Goods', href: '/dangerous-goods'},
 ]
 const callsToAction = [
   { name: 'Login', href: '#', icon: PlayCircleIcon },

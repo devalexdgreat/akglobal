@@ -2,7 +2,7 @@ import CtaButton from "@/components/CtaButton";
 import Footer from "@/components/Footer";
 import HomeNav from "@/components/HomeNav";
 
-export default function Team() {
+export default function Terms() {
     return (
         <div className="w-full">
             <HomeNav />
