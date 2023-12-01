@@ -5,7 +5,7 @@ import { AuthProvider } from './Providers';
 const font = Poppins({ subsets: ['latin'], weight: "300" });
 
 export const metadata = {
-  title: 'Ak Global - Track your Shipment',
+  title: 'Ak Global Shipping Services PTE.',
   description: 'Ak Global Ship Services PTE.',
   icons: {
     icon: '/favicon.png',
