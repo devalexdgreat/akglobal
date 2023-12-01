@@ -50,3 +50,19 @@
     background-size: cover;
     background-position: bottom;
 }
+
+.customsBanner {
+    background-image: url('../public/customs_header.jpg');
+    background-size: cover;
+    background-position: bottom;
+}
+
+.usaBanner {
+    background-image: url('../public/government_header.jpg');
+    background-size: cover;
+    background-position: bottom;
+}
+
+ul {
+    list-style-type: disc;
+}
