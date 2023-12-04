@@ -12,6 +12,10 @@ import { redirect } from 'next/navigation';
 import HomeNav from "@/components/HomeNav";
 import Footer from "@/components/Footer";
 import CtaButton from "@/components/CtaButton";
+import Logo from '@/public/logo.png';
+import Barcode from '@/public/barcode.gif';
+import PrintBtn from "@/components/PrintBtn";
+import BarcodeEl from "@/components/BacodeEl";
 
 const getItems = async () => {
     try {
@@ -73,6 +77,7 @@ export default async function TrackResult({ params }) {
     }
     console.log("hey: ", matchedItem);
     console.log("my iD is: ", matchedItem[0]._id);
+    const barData = matchedItem[0].tracking_id;
 
 
     const matchedComment = allComs.filter(obj => obj.itemid == matchedItem[0]._id);
@@ -85,7 +90,7 @@ export default async function TrackResult({ params }) {
             <div className="w-full pt-24">
                 <div className="w-11/12 mx-auto flex gap-8 flex-col md:flex-row">
                     <div className="w-full md:w-7/12 flex flex-col gap-8">
-                        <div className="flex items-center justify-between w-full">
+                        <div className="flex flex-col md:flex-row gap-5 md:gap-0 items-center justify-between w-full">
                             <div className="flex gap-2 items-center">
                                 <div className="h-10 w-10">
                                     <Image src={boxIcon} className="" alt=""/>
@@ -97,6 +102,9 @@ export default async function TrackResult({ params }) {
                                 <span className="font-bold">
                                     {matchedItem[0].tracking_id}
                                 </span>
+                            </div>
+                            <div>
+                                <PrintBtn/>
                             </div>
                         </div>
 
@@ -232,7 +240,7 @@ export default async function TrackResult({ params }) {
                                                 <Image src={locationIcon} className="" alt="" />
                                             </div>
                                             <div className="flex flex-col gap-1">
-                                                <span>Origin City</span>
+                                                <span>Destination City</span>
                                                 <span className="font-bold">
                                                     {matchedItem[0].destination_city}
                                                 </span>
@@ -248,7 +256,7 @@ export default async function TrackResult({ params }) {
                                             <div className="flex flex-col gap-1">
                                                 <span>Shipping Date</span>
                                                 <span className="font-bold">
-                                                    {matchedItem[0].delivery_time}
+                                                    {matchedItem[0].shipping_time_rec}
                                                 </span>
                                             </div>
                                         </div>
@@ -324,6 +332,107 @@ export default async function TrackResult({ params }) {
                                 </li>
                             </ul>
                             ))}
+                        </div>
+                    </div>
+                </div>
+
+
+                <div className="w-8/12 mx-auto" id='printablediv' style={{display: "none"}}>
+                    <div className="w-full mb-32">
+                        <div className="flex justify-between gap-25 items-center border-b border-black pb-4">
+                            <div className="flex gap-2 items-center">
+                                <div className="h-12 w-12">
+                                    <Image src={Logo} alt="" className="w-full h-full" />
+                                </div>
+                                <span className="flex flex-col gap-1 font-bold">
+                                    <span>Ak Global</span>
+                                    <span>Ship Services</span>
+                                </span> 
+                            </div>
+                            
+                            <div className="flex flex-col text-center">
+                                <span>NIT: 800124570-87</span>
+                                <span>Phone: 6692843100</span>
+                                <span>Email: Support@akglobalshipservices.com</span>
+                                <span>Address: (B01) 994 Bendemeer Road <br/> #06-06 B-Central, Singapore 339943</span>
+                            </div>
+                            <div className="flex items-center justify-center h-24 w-52">
+                                <BarcodeEl data={barData}/>
+                            </div>
+                        </div>
+                        <div className="flex item-center justify-between mt-12">
+                            <div className="w-6/12 flex items-center justify-center">
+                                <div className="w-full flex flex-col gap-1">
+                                    <span className="flex flex-col mb-6 font-bold">
+                                        <span className="">Bill to </span>
+                                        <span>{matchedItem[0].sender_name}</span>
+                                    </span>
+                                    
+                                    <span className="font-medium">{matchedItem[0].sender_address}</span>
+                                    <span className="font-medium">{matchedItem[0].city_collection} | {matchedItem[0].origin_city}</span>
+                                    <span className="font-medium">{matchedItem[0].sender_address}</span> 
+                                </div>
+                            </div>
+                            <div className="w-6/12 flex items-center justify-end">
+                                <div className="w-9/12">
+                                    <table class="w-full border-collapse border border-border">
+                                    <tbody>
+                                        <tr>
+                                        <td class="border border-black bg-gray-500 pl-2 py-3 text-left
+                                         text-white">Delivery Address</td>
+                                        <td class="border border-black pr-2 py-3 text-right">{matchedItem[0].delivery_city}</td>
+                                        </tr>
+                                        <tr>
+                                        <td class="border border-black bg-gray-500 pl-2 py-3 text-left
+                                         text-white">Delivery Date</td>
+                                        <td class="border border-black pr-2 py-3 text-right">{matchedItem[0].delivery_time}</td>
+                                        </tr>
+                                        <tr>
+                                        <td class="border border-black bg-gray-500 pl-2 py-3 text-left
+                                         text-white">Shipping date</td>
+                                        <td class="border border-black pr-2 py-3 text-right">{matchedItem[0].shipping_time_rec}</td>
+                                        </tr>
+                                        <tr>
+                                        <td class="border border-black bg-gray-500 pl-2 py-3 text-left
+                                         text-white">Invoice No..</td>
+                                        <td class="border border-black pr-2 py-3 text-right font-bold">{matchedItem[0].tracking_id}</td>
+                                        </tr>
+                                    </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="w-full mt-12">
+                            <div className="w-full">
+                                <table class="border-collapse border border-slate-500 w-full">
+                                    <thead>
+                                        <tr>
+                                        <th class="border border-slate-600 py-3 bg-gray-500 text-white">Item Quantity</th>
+                                        <th class="border border-slate-600 py-3 bg-gray-500 text-white">Weight</th>
+                                        <th class="border border-slate-600 py-3 bg-gray-500 text-white">Total Fee($)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="border border-slate-700 py-3 text-center">{matchedItem[0].shipping_quantity}</td>
+                                            <td class="border border-slate-700 py-3 text-center">{matchedItem[0].item_weight}</td>
+                                            <td class="border border-slate-700 py-3 text-center">500</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div className="w-full flex justify-center border-b border-black">
+                                <span className="uppercase text-center tracking-[10px] mt-4 mb-1">Terms</span>
+                            </div>
+                            <div className="w-full mt-1">
+                                <span className="w-full">
+                                ACCEPTED: This Invoice is a title value in accordance with 
+                                the provisions of art. 3 of law 1231 of July 17/08. 
+                                The signature by third parties in representation, mandate 
+                                or other quality on behalf of the buyer implies its obligation 
+                                in accordance with art. 640 of the commercial code.
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>

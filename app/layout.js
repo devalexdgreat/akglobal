@@ -2,7 +2,7 @@ import { Poppins } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from './Providers';
 
-const font = Poppins({ subsets: ['latin'], weight: "300" });
+const font = Poppins({ subsets: ['latin'], weight: "300", });
 
 export const metadata = {
   title: 'Ak Global Shipping Services PTE.',
