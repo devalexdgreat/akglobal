@@ -1,4 +1,5 @@
-import Navbar from "@/components/Navbar";
+"use client";
+
 import Image from "next/image";
 import boxIcon from "@/public/box.png";
 import locationIcon from "@/public/location.png";
@@ -8,106 +9,29 @@ import dirIcon from "@/public/dir.png";
 import conIcon from "@/public/contact.png";
 import weightIcon from "@/public/ib.png";
 import sizeIcon from "@/public/size.png";
-import { redirect } from 'next/navigation';
-import HomeNav from "@/components/HomeNav";
-import Footer from "@/components/Footer";
-import CtaButton from "@/components/CtaButton";
+import BarcodeEl from "./BacodeEl";
+import PrintBtn from "./PrintBtn";
 import Logo from '@/public/logo.png';
-import PrintBtn from "@/components/PrintBtn";
-import BarcodeEl from "@/components/BacodeEl";
-import Result from "@/components/Result";
 
-const getItems = async () => {
-    try {
-        const res = await fetch(`${process.env.NEXTAUTH_PURL}/api/items`, {
-            cache: "no-store",
-        });
+export default function Result({ tracking_id, origin_city, city_collection, shipping_date, shipping_time, sender_name, 
+    sender_address, shipping_quantity, item_weight, phn, email, paymode, service_type, company, 
+    ship_mode, desc, length, width, height, weight_vol, dec_value, price_lb, discount, insurance, 
+    tariff, tax, dec_tax, re_exp, c_fee, delivery_city, destination_city,
+    shipping_time_rec, delivery_time, receiver_name, receiver_address, 
+    commentData, barData, subTotal, taxTotal, cusTotal, feeTotal }) {
 
-        if (!res.ok) {
-            throw new Error("Failed to fetch item");
-        }
-        const items = await res.json();
-        console.log("i am all the ", items);
-        return items;
-    } catch (error) {
-        console.log(error);
+    const Print = () =>{     
+        //console.log('print');  
+        let printContents = document.getElementById('printablediv').innerHTML;
+        let originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents; 
     }
-}
-
-const getComments = async () => {
-    try {
-        const res = await fetch('https://www.akglobalshipservices.com/api/comments', {
-            cache: 'no-store',
-        });
-        
-        if(!res.ok) {
-            throw new Error("Failed to fetch Comments");
-        }
-
-        const comments = await res.json();
-        console.log("i am all the ", comments);
-        return comments;
-        
-
-    } catch (error) {
-        console.log("Error loading comments: ", error);
-    }
-};
-
-export default async function TrackResult({ params }) {
-
-    // const hideDisplay = () => {
-
-    // }
-
-    const { id } = params;
-    const askedId = id;
-    const allItems = await getItems();
-    const allComs = await getComments();
-
-    console.log("I am all Items: ", allItems);
-    console.log("I am all Comments: ", allComs);
-    console.log("I am Asked Id: ", askedId);
-
-    const matchedItem = allItems.filter(obj => obj.tracking_id == askedId);
-    if(matchedItem.length === 0) {
-        console.log("error");
-        redirect('/errorShow');
-        return;
-    }
-    console.log("hey: ", matchedItem);
-    console.log("my iD is: ", matchedItem[0]._id);
-    const barData = matchedItem[0].tracking_id;
-    const subTotal = matchedItem[0].price_lb * matchedItem[0].weight_vol;
-    const cusTotal = matchedItem[0].weight_vol * matchedItem[0].tariff;
-    const taxTotal = cusTotal * matchedItem[0].tax;
-    const feeTotal = subTotal*1 + matchedItem[0].insurance*1 + cusTotal*1 + taxTotal*1;
-
-    const matchedComment = allComs.filter(obj => obj.itemid == matchedItem[0]._id);
-    console.log("Good Morning", matchedComment);
+    console.log("I am tracking id: ", tracking_id);
 
     return (
-        <div className="w-full">
-            <HomeNav />
-            <CtaButton />
-            <Result tracking_id={matchedItem[0].tracking_id} origin_city={matchedItem[0].origin_city} 
-                    city_collection={matchedItem[0].city_collection} shipping_date={matchedItem[0].shipping_date} 
-                    shipping_time={matchedItem[0].shipping_time} sender_name={matchedItem[0].sender_name} 
-                    sender_address={matchedItem[0].sender_address} shipping_quantity={matchedItem[0].shipping_quantity} 
-                    item_weight={matchedItem[0].item_weight} phn={matchedItem[0].phn} email={matchedItem[0].email} 
-                    paymode={matchedItem[0].paymode} service_type={matchedItem[0].service_type} company={matchedItem[0].company} 
-                    ship_mode={matchedItem[0].ship_mode} desc={matchedItem[0].desc} length={matchedItem[0].length} 
-                    width={matchedItem[0].width} height={matchedItem[0].height} weight_vol={matchedItem[0].weight_vol} 
-                    dec_value={matchedItem[0].dec_value} price_lb={matchedItem[0].price_lb} discount={matchedItem[0].discount} 
-                    insurance={matchedItem[0].insurance} tariff={matchedItem[0].tariff} tax={matchedItem[0].tax} 
-                    dec_tax={matchedItem[0].dec_tax} re_exp={matchedItem[0].re_exp} c_fee={matchedItem[0].c_fee} 
-                    delivery_city={matchedItem[0].delivery_city} destination_city={matchedItem[0].destination_city}
-                    shipping_time_rec={matchedItem[0].shipping_time_rec} delivery_time={matchedItem[0].delivery_time} 
-                    receiver_name={matchedItem[0].receiver_name} receiver_address={matchedItem[0].receiver_address} 
-                    commentData={matchedComment} barData={barData} subTotal={subTotal}
-                    cusTotal={cusTotal} taxTotal={taxTotal} feeTotal={feeTotal}
-                    />
-            {/* <div className="w-full pt-24">
+        <div className="w-full pt-24">
                 <div className="w-11/12 mx-auto flex gap-8 flex-col md:flex-row">
                     <div className="w-full md:w-7/12 flex flex-col gap-8">
                         <div className="flex flex-col md:flex-row gap-5 md:gap-0 items-center justify-between w-full">
@@ -120,11 +44,13 @@ export default async function TrackResult({ params }) {
                             <div className="flex flex-col">
                                 <span>Track Shipment ID: </span>
                                 <span className="font-bold">
-                                    {matchedItem[0].tracking_id}
+                                    {tracking_id}
                                 </span>
                             </div>
                             <div>
-                                <PrintBtn/>
+                            <button className="py-2 px-6 bg-blue-500 hover:bg-blue-600 text-white rounded-lg" onClick={Print}>
+                                Print Shipment
+                            </button>
                             </div>
                         </div>
 
@@ -142,7 +68,7 @@ export default async function TrackResult({ params }) {
                                             <div className="flex flex-col gap-1">
                                                 <span>City Collection</span>
                                                 <span className="font-bold">
-                                                    {matchedItem[0].city_collection}
+                                                    {city_collection}
                                                 </span>
                                             </div>
                                         </div>
@@ -153,7 +79,7 @@ export default async function TrackResult({ params }) {
                                             <div className="flex flex-col gap-1">
                                                 <span>Origin City</span>
                                                 <span className="font-bold">
-                                                    {matchedItem[0].origin_city}
+                                                    {origin_city}
                                                 </span>
                                             </div>
                                         </div>
@@ -167,7 +93,7 @@ export default async function TrackResult({ params }) {
                                             <div className="flex flex-col gap-1">
                                                 <span>Shipping Date</span>
                                                 <span className="font-bold">
-                                                    {matchedItem[0].shipping_date}
+                                                    {shipping_date}
                                                 </span>
                                             </div>
                                         </div>
@@ -178,7 +104,7 @@ export default async function TrackResult({ params }) {
                                             <div className="flex flex-col gap-1">
                                                 <span>Shipping Time</span>
                                                 <span className="font-bold">
-                                                    {matchedItem[0].shipping_time}
+                                                    {shipping_time}
                                                 </span>
                                             </div>
                                         </div>
@@ -192,7 +118,7 @@ export default async function TrackResult({ params }) {
                                             <div className="flex flex-col gap-1">
                                                 <span>Contact Name</span>
                                                 <span className="font-bold">
-                                                    {matchedItem[0].sender_name}
+                                                    {sender_name}
                                                 </span>
                                             </div>
                                         </div>
@@ -203,7 +129,7 @@ export default async function TrackResult({ params }) {
                                             <div className="flex flex-col gap-1">
                                                 <span>Contact Address</span>
                                                 <span className="font-bold">
-                                                    {matchedItem[0].sender_address}
+                                                    {sender_address}
                                                 </span>
                                             </div>
                                         </div>
@@ -217,7 +143,7 @@ export default async function TrackResult({ params }) {
                                             <div className="flex flex-col gap-1">
                                                 <span>Shipping Quantity</span>
                                                 <span className="font-bold">
-                                                    {matchedItem[0].shipping_quantity}
+                                                    {shipping_quantity}
                                                 </span>
                                             </div>
                                         </div>
@@ -228,7 +154,7 @@ export default async function TrackResult({ params }) {
                                             <div className="flex flex-col gap-1">
                                                 <span>Total Weight (Ibs)</span>
                                                 <span className="font-bold">
-                                                    {matchedItem[0].item_weight}
+                                                    {item_weight}
                                                 </span>
                                             </div>
                                         </div>
@@ -251,7 +177,7 @@ export default async function TrackResult({ params }) {
                                             <div className="flex flex-col gap-1">
                                                 <span>Delivery City</span>
                                                 <span className="font-bold">
-                                                    {matchedItem[0].delivery_city}
+                                                    {delivery_city}
                                                 </span>
                                             </div>
                                         </div>
@@ -262,7 +188,7 @@ export default async function TrackResult({ params }) {
                                             <div className="flex flex-col gap-1">
                                                 <span>Destination City</span>
                                                 <span className="font-bold">
-                                                    {matchedItem[0].destination_city}
+                                                    {destination_city}
                                                 </span>
                                             </div>
                                         </div>
@@ -276,7 +202,7 @@ export default async function TrackResult({ params }) {
                                             <div className="flex flex-col gap-1">
                                                 <span>Shipping Date</span>
                                                 <span className="font-bold">
-                                                    {matchedItem[0].shipping_time_rec}
+                                                    {shipping_time_rec}
                                                 </span>
                                             </div>
                                         </div>
@@ -287,7 +213,7 @@ export default async function TrackResult({ params }) {
                                             <div className="flex flex-col gap-1">
                                                 <span>Delivery Date</span>
                                                 <span className="font-bold">
-                                                    {matchedItem[0].delivery_time}
+                                                    {delivery_time}
                                                 </span>
                                             </div>
                                         </div>
@@ -301,7 +227,7 @@ export default async function TrackResult({ params }) {
                                             <div className="flex flex-col gap-1">
                                                 <span>Contact Name</span>
                                                 <span className="font-bold">
-                                                    {matchedItem[0].receiver_name}
+                                                    {receiver_name}
                                                 </span>
                                             </div>
                                         </div>
@@ -312,7 +238,7 @@ export default async function TrackResult({ params }) {
                                             <div className="flex flex-col gap-1">
                                                 <span>Contact Address</span>
                                                 <span className="font-bold">
-                                                    {matchedItem[0].receiver_address}
+                                                    {receiver_address}
                                                 </span>
                                             </div>
                                         </div>
@@ -326,7 +252,7 @@ export default async function TrackResult({ params }) {
                            <h1 className="font-bold text-xl">Shipping history</h1> 
                         </div>
                         <div className="flex flex-col gap-5">
-                        {matchedComment.map((t) => (
+                        {commentData.map((t) => (
                             <ul key={t._id} className="border-l-2 border-blue-500 p-4 list-disc">
                                 <li className="flex justify-between">
                                     <div>
@@ -385,13 +311,13 @@ export default async function TrackResult({ params }) {
                                 <div className="w-full flex flex-col">
                                     <span className="flex flex-col mb-6 font-bold">
                                         <span className="">Bill to </span>
-                                        <span>{matchedItem[0].sender_name}</span>
+                                        <span>{sender_name}</span>
                                     </span>
                                     
-                                    <span className="font-medium">{matchedItem[0].sender_address}</span>
-                                    <span className="font-medium">{matchedItem[0].city_collection} | {matchedItem[0].origin_city}</span>
-                                    <span className="font-medium">{matchedItem[0].phn}</span> 
-                                    <span className="font-medium">{matchedItem[0].email}</span> 
+                                    <span className="font-medium">{sender_address}</span>
+                                    <span className="font-medium">{city_collection} | {origin_city}</span>
+                                    <span className="font-medium">{phn}</span> 
+                                    <span className="font-medium">{email}</span> 
                                 </div>
                             </div>
                             <div className="w-6/12 flex items-center justify-end">
@@ -401,14 +327,14 @@ export default async function TrackResult({ params }) {
                                         <tr>
                                         <td class="border border-black bg-gray-500 pl-2 py-3 text-left
                                          text-white">Pay Mode</td>
-                                        <td class="border border-black pr-2 py-3 text-right">{matchedItem[0].paymode}</td>
+                                        <td class="border border-black pr-2 py-3 text-right">{paymode}</td>
                                         </tr>
                                         <tr>
                                         <td class="border border-black bg-gray-500 pl-2 py-3 text-left
                                          text-white">
                                             Service Shipping
                                          </td>
-                                        <td class="border border-black pr-2 py-3 text-right">{matchedItem[0].service_type}</td>
+                                        <td class="border border-black pr-2 py-3 text-right">{service_type}</td>
                                         </tr>
                                         <tr>
                                         <td class="border border-black bg-gray-500 pl-2 py-3 text-left
@@ -420,20 +346,20 @@ export default async function TrackResult({ params }) {
                                          </td>
                                         <td class="border border-black pr-2 py-3 text-right">
                                             <span className="flex flex-col gap-1">
-                                                <span>{matchedItem[0].company}</span>
-                                                <span>{matchedItem[0].ship_mode}</span>
+                                                <span>{company}</span>
+                                                <span>{ship_mode}</span>
                                             </span>
                                         </td>
                                         </tr>
                                         <tr>
                                         <td class="border border-black bg-gray-500 pl-2 py-3 text-left
                                          text-white">Shipping date</td>
-                                        <td class="border border-black pr-2 py-3 text-right">{matchedItem[0].shipping_time_rec}</td>
+                                        <td class="border border-black pr-2 py-3 text-right">{shipping_time_rec}</td>
                                         </tr>
                                         <tr>
                                         <td class="border border-black bg-gray-500 pl-2 py-3 text-left
                                          text-white">Invoice No..</td>
-                                        <td class="border border-black pr-2 py-3 text-right font-bold">{matchedItem[0].tracking_id}</td>
+                                        <td class="border border-black pr-2 py-3 text-right font-bold">{tracking_id}</td>
                                         </tr>
                                     </tbody>
                                     </table>
@@ -457,21 +383,21 @@ export default async function TrackResult({ params }) {
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td class="border border-slate-700 py-3 text-center">{matchedItem[0].shipping_quantity}</td>
-                                            <td class="border border-slate-700 py-3 text-center">{matchedItem[0].desc}</td>
-                                            <td class="border border-slate-700 py-3 text-center">{matchedItem[0].item_weight}</td>
-                                            <td class="border border-slate-700 py-3 text-center">{matchedItem[0].length}</td>
-                                            <td class="border border-slate-700 py-3 text-center">{matchedItem[0].width}</td>
-                                            <td class="border border-slate-700 py-3 text-center">{matchedItem[0].height}</td>
-                                            <td class="border border-slate-700 py-3 text-center">{matchedItem[0].weight_vol}</td>
-                                            <td class="border border-slate-700 py-3 text-center">{matchedItem[0].dec_value}</td>
+                                            <td class="border border-slate-700 py-3 text-center">{shipping_quantity}</td>
+                                            <td class="border border-slate-700 py-3 text-center">{desc}</td>
+                                            <td class="border border-slate-700 py-3 text-center">{item_weight}</td>
+                                            <td class="border border-slate-700 py-3 text-center">{length}</td>
+                                            <td class="border border-slate-700 py-3 text-center">{width}</td>
+                                            <td class="border border-slate-700 py-3 text-center">{height}</td>
+                                            <td class="border border-slate-700 py-3 text-center">{weight_vol}</td>
+                                            <td class="border border-slate-700 py-3 text-center">{dec_value}</td>
                                         </tr>
 
                                         <tr>
                                             <td class="border border-slate-700 py-1 text-left pl-2" colSpan={2}>
                                                 <span className="flex gap-1 items-center">
                                                     <span className="font-bold">Price Lb:</span>
-                                                    <span>{matchedItem[0].price_lb}</span>
+                                                    <span>{price_lb}</span>
                                                 </span>
                                             </td>
                                             <td class="border border-slate-700 py-1 text-center"></td>
@@ -493,11 +419,11 @@ export default async function TrackResult({ params }) {
                                             <td class="border border-slate-700 py-1 text-right pr-2 font-bold" colSpan={3}>
                                                 <span className="flex gap-1 items-end w-full justify-end">
                                                     <span className="font-bold">Discount</span>
-                                                    <span>{matchedItem[0].discount}</span>
+                                                    <span>{discount}</span>
                                                     <span>%</span>
                                                 </span>
                                             </td>
-                                            <td class="border border-slate-700 py-1 text-center">{matchedItem[0].discount}</td>
+                                            <td class="border border-slate-700 py-1 text-center">{discount}</td>
                                         </tr>
 
                                         <tr>
@@ -512,18 +438,18 @@ export default async function TrackResult({ params }) {
                                             <td class="border border-slate-700 py-1 text-right pr-2 font-bold" colSpan={3}>
                                                 <span className="flex items-end w-full justify-end gap-1">
                                                     <span className="font-bold">Shipping insurance</span>
-                                                    <span>{matchedItem[0].insurance}</span>
+                                                    <span>{insurance}</span>
                                                     <span>%</span>
                                                 </span>
                                             </td>
-                                            <td class="border border-slate-700 py-1 text-center">{matchedItem[0].insurance}</td>
+                                            <td class="border border-slate-700 py-1 text-center">{insurance}</td>
                                         </tr>
 
                                         <tr>
                                             <td class="border border-slate-700 py-1 text-left pl-2" colSpan={2}>
                                                 <span className="flex gap-1 items-center">
                                                     <span className="font-bold">Total volumetric weight:</span>
-                                                    <span>{matchedItem[0].weight_vol}</span>
+                                                    <span>{weight_vol}</span>
                                                 </span>
                                             </td>
                                             <td class="border border-slate-700 py-1 text-center"></td>
@@ -531,7 +457,7 @@ export default async function TrackResult({ params }) {
                                             <td class="border border-slate-700 py-1 text-right pr-2 font-bold" colSpan={3}>
                                                 <span className="flex items-end w-full justify-end gap-1">
                                                     <span className="font-bold">Customs tariffs</span>
-                                                    <span>{matchedItem[0].tariff}</span>
+                                                    <span>{tariff}</span>
                                                     <span>%</span>
                                                 </span>
                                             </td>
@@ -542,7 +468,7 @@ export default async function TrackResult({ params }) {
                                             <td class="border border-slate-700 py-1 text-left pl-2" colSpan={2}>
                                                 <span className="flex gap-1 items-center">
                                                     <span className="font-bold">Total weight calculation:</span>
-                                                    <span>{matchedItem[0].weight_vol}</span>
+                                                    <span>{weight_vol}</span>
                                                 </span>
                                             </td>
                                             <td class="border border-slate-700 py-1 text-center"></td>
@@ -550,7 +476,7 @@ export default async function TrackResult({ params }) {
                                             <td class="border border-slate-700 py-1 text-right pr-2 font-bold" colSpan={3}>
                                                 <span className="flex items-end w-full justify-end gap-1">
                                                     <span className="font-bold">Tax</span>
-                                                    <span>{matchedItem[0].tax}</span>
+                                                    <span>{tax}</span>
                                                     <span>%</span>
                                                 </span>
                                             </td>
@@ -561,7 +487,7 @@ export default async function TrackResult({ params }) {
                                             <td class="border border-slate-700 py-1 text-left pl-2" colSpan={2}>
                                                 <span className="flex gap-1 items-center">
                                                     <span className="font-bold">Total declared value:</span>
-                                                    <span>{matchedItem[0].dec_value}</span>
+                                                    <span>{dec_value}</span>
                                                 </span>
                                             </td>
                                             <td class="border border-slate-700 py-1 text-center"></td>
@@ -569,7 +495,7 @@ export default async function TrackResult({ params }) {
                                             <td class="border border-slate-700 py-1 text-right pr-2 font-bold" colSpan={3}>
                                                 <span className="flex items-end w-full justify-end gap-1">
                                                     <span className="font-bold">Declared tax</span>
-                                                    <span>{matchedItem[0].dec_tax}</span>
+                                                    <span>{dec_tax}</span>
                                                     <span>%</span>
                                                 </span>
                                             </td>
@@ -587,7 +513,7 @@ export default async function TrackResult({ params }) {
                                                     Re expedition
                                                 </span>
                                             </td>
-                                            <td class="border border-slate-700 py-1 text-center">{matchedItem[0].re_exp}</td>
+                                            <td class="border border-slate-700 py-1 text-center">{re_exp}</td>
                                         </tr>
 
                                         <tr>
@@ -622,8 +548,6 @@ export default async function TrackResult({ params }) {
                         </div>
                     </div>
                 </div>
-            </div> */}
-            <Footer />
-        </div>
-    );
+            </div>
+    )
 }
