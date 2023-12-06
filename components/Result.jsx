@@ -13,6 +13,18 @@ import BarcodeEl from "./BacodeEl";
 import PrintBtn from "./PrintBtn";
 import Logo from '@/public/logo.png';
 
+const Print = () =>{     
+        //console.log('print');  
+        let printContents = document.getElementById('printablediv').innerHTML;
+        let originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        let done = window.print();
+        if(!done) {
+            alert("Continue to Page");
+        }
+        document.body.innerHTML = originalContents; 
+    }
+
 export default function Result({ tracking_id, origin_city, city_collection, shipping_date, shipping_time, sender_name, 
     sender_address, shipping_quantity, item_weight, phn, email, paymode, service_type, company, 
     ship_mode, desc, length, width, height, weight_vol, dec_value, price_lb, discount, insurance, 
@@ -20,14 +32,7 @@ export default function Result({ tracking_id, origin_city, city_collection, ship
     shipping_time_rec, delivery_time, receiver_name, receiver_address, 
     commentData, barData, subTotal, taxTotal, cusTotal, feeTotal }) {
 
-    const Print = () =>{     
-        //console.log('print');  
-        let printContents = document.getElementById('printablediv').innerHTML;
-        let originalContents = document.body.innerHTML;
-        document.body.innerHTML = printContents;
-        window.print();
-        document.body.innerHTML = originalContents; 
-    }
+    
     console.log("I am tracking id: ", tracking_id);
 
     return (
