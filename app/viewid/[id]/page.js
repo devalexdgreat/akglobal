@@ -49,7 +49,9 @@ export default async function viewId({ params }) {
     console.log("ju si", com);
     
     const { tracking_id, origin_city, city_collection, shipping_date, shipping_time, sender_name, 
-        sender_address, shipping_quantity, item_weight, delivery_city, destination_city, 
+        sender_address, shipping_quantity, item_weight, phn, email, paymode, service_type, company, 
+        ship_mode, desc, length, width, height, weight_vol, dec_value, price_lb, discount, insurance, 
+        tariff, tax, dec_tax, re_exp, c_fee, delivery_city, destination_city,
         shipping_time_rec, delivery_time, receiver_name, receiver_address } = item;
 
         const queryId = item._id;
@@ -57,11 +59,11 @@ export default async function viewId({ params }) {
         <div className="w-full">
             <AdminNav />
             <div className="w-full mt-10 mb-16">
-                <div className="w-full md:w-8/12 p-5 shadow mx-auto md:mr-0 md:ml-12">
+                <div className="w-full md:w-11/12 p-5 shadow mx-auto md:mr-0 md:ml-12">
                     <h1 className="text-xl font-bold mb-4">More details</h1>
 
                     <div className="w-full flex gap-8 flex-col md:flex-row">
-                        <div className="w-full md:w-6/12">
+                        <div className="w-full md:w-4/12">
                             <div className="w-full bg-blue-500 text-white p-2 mb-3">
                                 <h1>Sender Info</h1>
                             </div>
@@ -73,10 +75,50 @@ export default async function viewId({ params }) {
                             <span><span className="font-bold">Shipping Time: </span>{shipping_time}</span><br/>
                             <span><span className="font-bold">Sender Name: </span>{sender_name}</span><br/>
                             <span><span className="font-bold">Sender Address: </span>{sender_address}</span><br/>
-                            <span><span className="font-bold">Shipping Quantity: </span>{shipping_quantity}</span><br/>
-                            <span><span className="font-bold">Total Weight: </span>{item_weight}</span><br/> 
+                            <span><span className="font-bold">Sender Email: </span>{email}</span><br/> 
+                            <span><span className="font-bold">Sender Phone: </span>{phn}</span><br/> 
                         </div>
-                        <div className="w-full md:w-6/12">
+                        <div className="w-full md:w-4/12">
+                            <div className="w-full bg-blue-500 text-white p-2 mb-3">
+                                <h1>Item / Payment Info</h1>
+                            </div>
+                            {/* <h1>this is {ddate}</h1> */}
+                            <span className="flex gap-1">
+                                <span><span className="font-bold">Total Weight: </span>{item_weight}</span>,
+                                <span><span className="font-bold">Total Weight(vol): </span>{weight_vol}</span>
+                            </span>
+                            <span><span className="font-bold">Item Description: </span>{desc}</span><br/>
+                            <span className="flex gap-1">
+                                <span><span className="font-bold">Length: </span>{length}</span>,
+                                <span><span className="font-bold">Width: </span>{width}</span>,
+                                <span><span className="font-bold">Height: </span>{height}</span>
+                            </span>
+                            <span className="flex gap-1">
+                                <span><span className="font-bold">Shipping Quantity: </span>{shipping_quantity}</span>,
+                                <span><span className="font-bold">Total Insurance: </span>{insurance}</span>
+                            </span>
+                            <span className="flex gap-1">
+                                <span><span className="font-bold">Paymode: </span>{paymode}</span>,
+                                <span><span className="font-bold">Discount: </span>{discount}</span>
+                            </span>
+                            
+                            <span><span className="font-bold">Service Shipping: </span>{service_type}</span><br/>
+                            <span><span className="font-bold">Shipping Mode: </span>{ship_mode}</span><br/>
+                            <span><span className="font-bold">Courier Company: </span>{company}</span><br/>
+                            <span className="flex gap-1">
+                                <span><span className="font-bold">Tax: </span>{tax}</span>,
+                                <span><span className="font-bold">Declared Tax: </span>{dec_tax}</span>
+                            </span>
+                            <span className="flex gap-1">
+                                <span><span className="font-bold">Tariffs: </span>{tariff}</span>,
+                                <span><span className="font-bold">Price Lb: </span>{price_lb}</span>
+                            </span>
+                            <span className="flex gap-1">
+                                <span><span className="font-bold">Re Expedition: </span>{re_exp}</span>,
+                                <span><span className="font-bold">Declared Value: </span>{dec_value}</span>
+                            </span>
+                        </div>
+                        <div className="w-full md:w-4/12">
                             <div className="w-full bg-blue-500 text-white p-2 mb-3">
                                 <h1>Receiver Info</h1>
                             </div>

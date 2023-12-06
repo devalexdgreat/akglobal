@@ -78,7 +78,10 @@ export default async function TrackResult({ params }) {
     console.log("hey: ", matchedItem);
     console.log("my iD is: ", matchedItem[0]._id);
     const barData = matchedItem[0].tracking_id;
-
+    const subTotal = matchedItem[0].price_lb * matchedItem[0].weight_vol;
+    const cusTotal = matchedItem[0].weight_vol * matchedItem[0].tariff;
+    const taxTotal = cusTotal * matchedItem[0].tax;
+    const feeTotal = subTotal*1 + matchedItem[0].insurance*1 + cusTotal*1 + taxTotal*1;
 
     const matchedComment = allComs.filter(obj => obj.itemid == matchedItem[0]._id);
     console.log("Good Morning", matchedComment);
@@ -337,7 +340,7 @@ export default async function TrackResult({ params }) {
                 </div>
 
 
-                <div className="w-8/12 mx-auto" id='printablediv' style={{display: "none"}}>
+                <div className="w-8/12 mx-auto" id='printablediv' style={{ display : "none"}}>
                     <div className="w-full mb-32">
                         <div className="flex justify-between gap-25 items-center border-b border-black pb-4">
                             <div className="flex gap-2 items-center">
@@ -362,7 +365,7 @@ export default async function TrackResult({ params }) {
                         </div>
                         <div className="flex item-center justify-between mt-12">
                             <div className="w-6/12 flex items-center justify-center">
-                                <div className="w-full flex flex-col gap-1">
+                                <div className="w-full flex flex-col">
                                     <span className="flex flex-col mb-6 font-bold">
                                         <span className="">Bill to </span>
                                         <span>{matchedItem[0].sender_name}</span>
@@ -370,7 +373,8 @@ export default async function TrackResult({ params }) {
                                     
                                     <span className="font-medium">{matchedItem[0].sender_address}</span>
                                     <span className="font-medium">{matchedItem[0].city_collection} | {matchedItem[0].origin_city}</span>
-                                    <span className="font-medium">{matchedItem[0].sender_address}</span> 
+                                    <span className="font-medium">{matchedItem[0].phn}</span> 
+                                    <span className="font-medium">{matchedItem[0].email}</span> 
                                 </div>
                             </div>
                             <div className="w-6/12 flex items-center justify-end">
@@ -379,13 +383,30 @@ export default async function TrackResult({ params }) {
                                     <tbody>
                                         <tr>
                                         <td class="border border-black bg-gray-500 pl-2 py-3 text-left
-                                         text-white">Delivery Address</td>
-                                        <td class="border border-black pr-2 py-3 text-right">{matchedItem[0].delivery_city}</td>
+                                         text-white">Pay Mode</td>
+                                        <td class="border border-black pr-2 py-3 text-right">{matchedItem[0].paymode}</td>
                                         </tr>
                                         <tr>
                                         <td class="border border-black bg-gray-500 pl-2 py-3 text-left
-                                         text-white">Delivery Date</td>
-                                        <td class="border border-black pr-2 py-3 text-right">{matchedItem[0].delivery_time}</td>
+                                         text-white">
+                                            Service Shipping
+                                         </td>
+                                        <td class="border border-black pr-2 py-3 text-right">{matchedItem[0].service_type}</td>
+                                        </tr>
+                                        <tr>
+                                        <td class="border border-black bg-gray-500 pl-2 py-3 text-left
+                                         text-white">
+                                            <span className="flex flex-col gap-1">
+                                                <span>Courier Company</span>
+                                                <span>Shipping Mode</span>
+                                            </span>
+                                         </td>
+                                        <td class="border border-black pr-2 py-3 text-right">
+                                            <span className="flex flex-col gap-1">
+                                                <span>{matchedItem[0].company}</span>
+                                                <span>{matchedItem[0].ship_mode}</span>
+                                            </span>
+                                        </td>
                                         </tr>
                                         <tr>
                                         <td class="border border-black bg-gray-500 pl-2 py-3 text-left
@@ -404,22 +425,170 @@ export default async function TrackResult({ params }) {
                         </div>
                         <div className="w-full mt-12">
                             <div className="w-full">
-                                <table class="border-collapse border border-slate-500 w-full">
+                                <table class="border-collapse border border-slate-500 w-full text-sm">
                                     <thead>
                                         <tr>
-                                        <th class="border border-slate-600 py-3 bg-gray-500 text-white">Item Quantity</th>
-                                        <th class="border border-slate-600 py-3 bg-gray-500 text-white">Weight</th>
-                                        <th class="border border-slate-600 py-3 bg-gray-500 text-white">Total Fee($)</th>
+                                        <th class="border border-slate-600 py-3 bg-gray-500 text-white">Quantity</th>
+                                        <th class="border border-slate-600 py-3 bg-gray-500 text-white">Description</th>
+                                        <th class="border border-slate-600 py-3 bg-gray-500 text-white">Weight<br/>(lb)</th>
+                                        <th class="border border-slate-600 py-3 bg-gray-500 text-white">Length<br/>(cm)</th>
+                                        <th class="border border-slate-600 py-3 bg-gray-500 text-white">Width<br/>(cm)</th>
+                                        <th class="border border-slate-600 py-3 bg-gray-500 text-white">Height<br/>(cm)</th>
+                                        <th class="border border-slate-600 py-3 bg-gray-500 text-white">Weight<br/> vol.<br/>(lb)</th>
+                                        <th class="border border-slate-600 py-3 bg-gray-500 text-white">Declared <br/>value</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td class="border border-slate-700 py-3 text-center">{matchedItem[0].shipping_quantity}</td>
+                                            <td class="border border-slate-700 py-3 text-center">{matchedItem[0].desc}</td>
                                             <td class="border border-slate-700 py-3 text-center">{matchedItem[0].item_weight}</td>
-                                            <td class="border border-slate-700 py-3 text-center">500</td>
+                                            <td class="border border-slate-700 py-3 text-center">{matchedItem[0].length}</td>
+                                            <td class="border border-slate-700 py-3 text-center">{matchedItem[0].width}</td>
+                                            <td class="border border-slate-700 py-3 text-center">{matchedItem[0].height}</td>
+                                            <td class="border border-slate-700 py-3 text-center">{matchedItem[0].weight_vol}</td>
+                                            <td class="border border-slate-700 py-3 text-center">{matchedItem[0].dec_value}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="border border-slate-700 py-1 text-left pl-2" colSpan={2}>
+                                                <span className="flex gap-1 items-center">
+                                                    <span className="font-bold">Price Lb:</span>
+                                                    <span>{matchedItem[0].price_lb}</span>
+                                                </span>
+                                            </td>
+                                            <td class="border border-slate-700 py-1 text-center"></td>
+                                            <td class="border border-slate-700 py-1 text-center"></td>
+                                            <td class="border border-slate-700 py-1 text-right pr-2 font-bold" colSpan={3}>
+                                                <span className="flex items-end w-full justify-end">
+                                                    <span className="font-bold">Subtotal</span>
+                                                </span>
+                                            </td>
+                                            <td class="border border-slate-700 py-1 text-center">{subTotal}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="border border-slate-700 py-1 text-left pl-2" colSpan={2}>
+                                                
+                                            </td>
+                                            <td class="border border-slate-700 py-1 text-center"></td>
+                                            <td class="border border-slate-700 py-1 text-center"></td>
+                                            <td class="border border-slate-700 py-1 text-right pr-2 font-bold" colSpan={3}>
+                                                <span className="flex gap-1 items-end w-full justify-end">
+                                                    <span className="font-bold">Discount</span>
+                                                    <span>{matchedItem[0].discount}</span>
+                                                    <span>%</span>
+                                                </span>
+                                            </td>
+                                            <td class="border border-slate-700 py-1 text-center">{matchedItem[0].discount}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="border border-slate-700 py-1 text-left pl-2" colSpan={2}>
+                                                <span className="flex gap-1 items-center">
+                                                    <span className="font-bold">Total pounds weight:</span>
+                                                    <span>0</span>
+                                                </span>
+                                            </td>
+                                            <td class="border border-slate-700 py-1 text-center"></td>
+                                            <td class="border border-slate-700 py-1 text-center"></td>
+                                            <td class="border border-slate-700 py-1 text-right pr-2 font-bold" colSpan={3}>
+                                                <span className="flex items-end w-full justify-end gap-1">
+                                                    <span className="font-bold">Shipping insurance</span>
+                                                    <span>{matchedItem[0].insurance}</span>
+                                                    <span>%</span>
+                                                </span>
+                                            </td>
+                                            <td class="border border-slate-700 py-1 text-center">{matchedItem[0].insurance}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="border border-slate-700 py-1 text-left pl-2" colSpan={2}>
+                                                <span className="flex gap-1 items-center">
+                                                    <span className="font-bold">Total volumetric weight:</span>
+                                                    <span>{matchedItem[0].weight_vol}</span>
+                                                </span>
+                                            </td>
+                                            <td class="border border-slate-700 py-1 text-center"></td>
+                                            <td class="border border-slate-700 py-1 text-center"></td>
+                                            <td class="border border-slate-700 py-1 text-right pr-2 font-bold" colSpan={3}>
+                                                <span className="flex items-end w-full justify-end gap-1">
+                                                    <span className="font-bold">Customs tariffs</span>
+                                                    <span>{matchedItem[0].tariff}</span>
+                                                    <span>%</span>
+                                                </span>
+                                            </td>
+                                            <td class="border border-slate-700 py-1 text-center">{cusTotal}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="border border-slate-700 py-1 text-left pl-2" colSpan={2}>
+                                                <span className="flex gap-1 items-center">
+                                                    <span className="font-bold">Total weight calculation:</span>
+                                                    <span>{matchedItem[0].weight_vol}</span>
+                                                </span>
+                                            </td>
+                                            <td class="border border-slate-700 py-1 text-center"></td>
+                                            <td class="border border-slate-700 py-1 text-center"></td>
+                                            <td class="border border-slate-700 py-1 text-right pr-2 font-bold" colSpan={3}>
+                                                <span className="flex items-end w-full justify-end gap-1">
+                                                    <span className="font-bold">Tax</span>
+                                                    <span>{matchedItem[0].tax}</span>
+                                                    <span>%</span>
+                                                </span>
+                                            </td>
+                                            <td class="border border-slate-700 py-1 text-center">{taxTotal}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="border border-slate-700 py-1 text-left pl-2" colSpan={2}>
+                                                <span className="flex gap-1 items-center">
+                                                    <span className="font-bold">Total declared value:</span>
+                                                    <span>{matchedItem[0].dec_value}</span>
+                                                </span>
+                                            </td>
+                                            <td class="border border-slate-700 py-1 text-center"></td>
+                                            <td class="border border-slate-700 py-1 text-center"></td>
+                                            <td class="border border-slate-700 py-1 text-right pr-2 font-bold" colSpan={3}>
+                                                <span className="flex items-end w-full justify-end gap-1">
+                                                    <span className="font-bold">Declared tax</span>
+                                                    <span>{matchedItem[0].dec_tax}</span>
+                                                    <span>%</span>
+                                                </span>
+                                            </td>
+                                            <td class="border border-slate-700 py-1 text-center">0</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="border border-slate-700 py-1 text-left pl-2" colSpan={2}>
+                                                
+                                            </td>
+                                            <td class="border border-slate-700 py-1 text-center"></td>
+                                            <td class="border border-slate-700 py-1 text-center"></td>
+                                            <td class="border border-slate-700 py-1 text-right pr-2 font-bold" colSpan={3}>
+                                                <span className="flex items-end w-full justify-end gap-1">
+                                                    Re expedition
+                                                </span>
+                                            </td>
+                                            <td class="border border-slate-700 py-1 text-center">{matchedItem[0].re_exp}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="border border-slate-700 py-1 text-left pl-2" colSpan={2}>
+                                                
+                                            </td>
+                                            <td class="border border-slate-700 py-1 text-center"></td>
+                                            <td class="border border-slate-700 py-1 text-center"></td>
+                                            <td class="border border-slate-700 py-1 text-right pr-2 font-bold" colSpan={3}>
+                                                <span className="flex items-end w-full justify-end gap-1">
+                                                    COURIER FEE  $	
+                                                </span>
+                                            </td>
+                                            <td class="border border-slate-700 py-1 text-center">{feeTotal}</td>
                                         </tr>
                                     </tbody>
                                 </table>
+
                             </div>
                             <div className="w-full flex justify-center border-b border-black">
                                 <span className="uppercase text-center tracking-[10px] mt-4 mb-1">Terms</span>

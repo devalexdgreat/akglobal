@@ -16,6 +16,26 @@ export default function CreateId() {
     const [sender_address, SetSender_address] = useState("");
     const [shipping_quantity, SetShipping_quantity] = useState("");
     const [item_weight, SetItem_weight] = useState("");
+    const [phn, SetPhn] = useState("");
+    const [email, SetEmail] = useState("");
+    const [paymode, SetPaymode] = useState("");
+    const [service_type, SetService_type] = useState("");
+    const [company, SetCompany] = useState("");
+    const [ship_mode, SetShip_mode] = useState("");
+    const [desc, SetDesc] = useState("");
+    const [length, SetLength] = useState("");
+    const [width, SetWidth] = useState("");
+    const [height, SetHeight] = useState("");
+    const [weight_vol, SetWeight_vol] = useState("");
+    const [dec_value, SetDec_value] = useState("");
+    const [price_lb, SetPrice_lb] = useState("");
+    const [discount, SetDiscount] = useState("");
+    const [insurance, SetInsurance] = useState("");
+    const [tariff, SetTariff] = useState("");
+    const [tax, SetTax] = useState("");
+    const [dec_tax, SetDec_tax] = useState("");
+    const [re_exp, SetRe_exp] = useState("");
+    const [c_fee, SetC_fee] = useState("");
     const [delivery_city, SetDelivery_city] = useState("");
     const [destination_city, SetDestination_city] = useState("");
     const [shipping_time_rec, SetShipping_time_rec] = useState("");
@@ -43,8 +63,9 @@ export default function CreateId() {
         e.preventDefault();
 
         if(!tracking_id || !origin_city || !city_collection || !shipping_date || !shipping_time || !sender_name || !sender_address || !shipping_quantity
-            || !item_weight || !delivery_city || !destination_city || !shipping_time_rec || !delivery_time 
-            || !receiver_name || !receiver_address ) {
+            || !item_weight || !phn || !email || !paymode || !service_type || !company || !ship_mode || !desc || !length || !width || !height || !weight_vol 
+            || !price_lb || !discount || !insurance || !tariff || !tax || !dec_tax || !re_exp || !c_fee || !delivery_city || !destination_city 
+            || !shipping_time_rec || !delivery_time || !receiver_name || !receiver_address ) {
             alert('This fields are required!');
             return;
         }
@@ -56,7 +77,9 @@ export default function CreateId() {
                     "Content-type": "application/json",
                 },
                 body: JSON.stringify({ tracking_id, origin_city, city_collection, shipping_date, shipping_time, sender_name, 
-                    sender_address, shipping_quantity, item_weight, delivery_city, destination_city,
+                    sender_address, shipping_quantity, item_weight, phn, email, paymode, service_type, company, 
+                    ship_mode, desc, length, width, height, weight_vol, dec_value, price_lb, discount, insurance, 
+                    tariff, tax, dec_tax, re_exp, c_fee, delivery_city, destination_city,
                     shipping_time_rec, delivery_time, receiver_name, receiver_address, }),
             });
 
@@ -84,7 +107,7 @@ export default function CreateId() {
                     <span className="font-bold text-xl">Sender Info</span>
 
 
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-8 mt-4">
+                    <form id="form" name="form" onSubmit={handleSubmit} className="flex flex-col gap-8 mt-4">
                         <div className="flex flex-col md:flex-row gap-5">
                             <div className="flex gap-5">
                                 <div className='flex flex-col gap-1'>
@@ -125,12 +148,6 @@ export default function CreateId() {
                                     type='text' placeholder='Enter City Collection' 
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div>
-                            </div>
-                        </div>
-                        
-
-                        <div className="flex gap-5 flex-col md:flex-row">
-                            <div className="flex gap-5 flex-col md:flex-row">
                                 <div className='flex flex-col gap-1'>
                                     <label>Shipping Time:</label>
                                     <input 
@@ -139,6 +156,12 @@ export default function CreateId() {
                                     type='text' placeholder='Enter Shipping Time' 
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div>
+                            </div>
+                        </div>
+                        
+                        <div className="flex gap-5 flex-col md:flex-row">
+                            <div className="flex gap-5 flex-col md:flex-row">
+                                
                                 <div className='flex flex-col gap-1'>
                                     <label>Sender Contact Name:</label>
                                     <input 
@@ -147,32 +170,215 @@ export default function CreateId() {
                                     type='text' placeholder='Enter Sender Name' 
                                     className='w-full border border-black p-3 rounded-lg new-inp'/>
                                 </div>
-                            </div> 
+                                <div className='flex flex-col gap-1'>
+                                    <label>Sender Contact Address:</label>
+                                    <input 
+                                    onChange={(e) => SetSender_address(e.target.value)}
+                                    value={sender_address}
+                                    type='text' placeholder='Enter Sender address' 
+                                    className='w-full border border-black p-3 rounded-lg new-inp'/>
+                                </div>
+                                <div className='flex flex-col gap-1'>
+                                    <label>Sender Phone Number:</label>
+                                    <input 
+                                    onChange={(e) => SetPhn(e.target.value)}
+                                    value={phn}
+                                    type='number' placeholder='Enter Sender Phone' 
+                                    className='w-full border border-black p-3 rounded-lg new-inp'/>
+                                </div>
+                                <div className='flex flex-col gap-1'>
+                                    <label>Sender Email Address:</label>
+                                    <input 
+                                    onChange={(e) => SetEmail(e.target.value)}
+                                    value={email}
+                                    type='email' placeholder='Enter Sender Email' 
+                                    className='w-full border border-black p-3 rounded-lg new-inp'/>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <span className="font-bold text-xl">Item Info</span>
+
+                        <div className="flex gap-5 flex-col md:flex-row">    
+                            <div className="flex flex-col md:flex-row gap-5">
+                                <div className='flex flex-col gap-1'>
+                                    <label>Item Description</label>
+                                    <input 
+                                    onChange={(e) => SetDesc(e.target.value)}
+                                    value={desc}
+                                    type='text' placeholder='Enter Description' 
+                                    className='w-full border border-black p-3 rounded-lg new-inp'/>
+                                </div>
+                                <div className='flex flex-col gap-1'>
+                                    <label>Item Length</label>
+                                    <input 
+                                    onChange={(e) => SetLength(e.target.value)}
+                                    value={length}
+                                    type='number' placeholder='Enter Item Length' 
+                                    className='w-full border border-black p-3 rounded-lg new-inp'/>
+                                </div>
+                                <div className='flex flex-col gap-1'>
+                                    <label>Item Width</label>
+                                    <input 
+                                    onChange={(e) => SetWidth(e.target.value)}
+                                    value={width}
+                                    type='number' placeholder='Enter Item Width' 
+                                    className='w-full border border-black p-3 rounded-lg new-inp'/>
+                                </div>
+                                <div className='flex flex-col gap-1'>
+                                    <label>Shipping Quantity</label>
+                                    <input 
+                                    onChange={(e) => SetShipping_quantity(e.target.value)}
+                                    value={shipping_quantity}
+                                    type='number' placeholder='Enter Shipping Quantity' 
+                                    className='w-full border border-black p-3 rounded-lg new-inp'/>
+                                </div>
+                                <div className='flex flex-col gap-1'>
+                                    <label>Total Weight</label>
+                                    <input 
+                                    onChange={(e) => SetItem_weight(e.target.value)}
+                                    value={item_weight}
+                                    type='number' placeholder='Enter Item Weight' 
+                                    className='w-full border border-black p-3 rounded-lg new-inp'/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="flex gap-5 flex-col md:flex-row">
                             <div className='flex flex-col gap-1'>
-                                <label>Sender Contact Address:</label>
+                                <label>Total Weight (Vol)</label>
                                 <input 
-                                onChange={(e) => SetSender_address(e.target.value)}
-                                value={sender_address}
-                                type='text' placeholder='Enter Sender address' 
+                                onChange={(e) => SetWeight_vol(e.target.value)}
+                                value={weight_vol}
+                                type='number' placeholder='Enter Item Weight Vol.' 
                                 className='w-full border border-black p-3 rounded-lg new-inp'/>
                             </div>
                             <div className='flex flex-col gap-1'>
-                                <label>Shipping Quantity</label>
+                                <label>Item Height</label>
                                 <input 
-                                onChange={(e) => SetShipping_quantity(e.target.value)}
-                                value={shipping_quantity}
-                                type='text' placeholder='Enter Shipping Quantity' 
+                                onChange={(e) => SetHeight(e.target.value)}
+                                value={height}
+                                type='number' placeholder='Enter Item Height' 
                                 className='w-full border border-black p-3 rounded-lg new-inp'/>
                             </div>
                             <div className='flex flex-col gap-1'>
-                                <label>Total Weight</label>
+                                <label>Declared Value</label>
                                 <input 
-                                onChange={(e) => SetItem_weight(e.target.value)}
-                                value={item_weight}
-                                type='text' placeholder='Enter Item Weight' 
+                                onChange={(e) => SetDec_value(e.target.value)}
+                                value={dec_value}
+                                type='number' placeholder='Enter Declared value' 
                                 className='w-full border border-black p-3 rounded-lg new-inp'/>
                             </div>
                         </div>
+
+                        <span className="font-bold text-xl">Payment Details</span>
+
+                        <div className="flex flex-col md:flex-row gap-5">
+                            <div className='flex flex-col gap-1'>
+                                <label>Pay Mode</label>
+                                <input 
+                                onChange={(e) => SetPaymode(e.target.value)}
+                                value={paymode}
+                                type='text' placeholder='Enter Pay mode' 
+                                className='w-full border border-black p-3 rounded-lg new-inp'/>
+                            </div>
+                            <div className='flex flex-col gap-1'>
+                                <label>Service Shipping</label>
+                                <input 
+                                onChange={(e) => SetService_type(e.target.value)}
+                                value={service_type}
+                                type='text' placeholder='Enter Service type' 
+                                className='w-full border border-black p-3 rounded-lg new-inp'/>
+                            </div>
+                            <div className='flex flex-col gap-1'>
+                                <label>Courier Company</label>
+                                <input 
+                                onChange={(e) => SetCompany(e.target.value)}
+                                value={company}
+                                type='text' placeholder='Enter Courier Company' 
+                                className='w-full border border-black p-3 rounded-lg new-inp'/>
+                            </div>
+                            <div className='flex flex-col gap-1'>
+                                <label>Shipping Mode</label>
+                                <input 
+                                onChange={(e) => SetShip_mode(e.target.value)}
+                                value={ship_mode}
+                                type='text' placeholder='Enter Shipping Mode' 
+                                className='w-full border border-black p-3 rounded-lg new-inp'/>
+                            </div>
+                            <div className='flex flex-col gap-1'>
+                                <label>Price Lb</label>
+                                <input 
+                                onChange={(e) => SetPrice_lb(e.target.value)}
+                                value={price_lb}
+                                type='number' placeholder='Enter Price Lb' 
+                                className='w-full border border-black p-3 rounded-lg new-inp'/>
+                            </div>
+                        </div>
+
+                        <div className="flex flex-col md:flex-row gap-5">
+                            <div className='flex flex-col gap-1'>
+                                <label>Discount</label>
+                                <input 
+                                onChange={(e) => SetDiscount(e.target.value)}
+                                value={discount}
+                                type='number' placeholder='Enter Discount' 
+                                className='w-full border border-black p-3 rounded-lg new-inp'/>
+                            </div>
+                            <div className='flex flex-col gap-1'>
+                                <label>Insurance</label>
+                                <input 
+                                onChange={(e) => SetInsurance(e.target.value)}
+                                value={insurance}
+                                type='number' placeholder='Enter Insurance' 
+                                className='w-full border border-black p-3 rounded-lg new-inp'/>
+                            </div>
+                            <div className='flex flex-col gap-1'>
+                                <label>Customs Tariffs</label>
+                                <input 
+                                onChange={(e) => SetTariff(e.target.value)}
+                                value={tariff}
+                                type='number' placeholder='Enter Customs Tariffs' 
+                                className='w-full border border-black p-3 rounded-lg new-inp'/>
+                            </div>
+                            <div className='flex flex-col gap-1'>
+                                <label>Tax</label>
+                                <input 
+                                onChange={(e) => SetTax(e.target.value)}
+                                value={tax}
+                                type='number' placeholder='Enter Tax' 
+                                className='w-full border border-black p-3 rounded-lg new-inp'/>
+                            </div>
+                            <div className='flex flex-col gap-1'>
+                                <label>Declared Tax</label>
+                                <input 
+                                onChange={(e) => SetDec_tax(e.target.value)}
+                                value={dec_tax}
+                                type='number' placeholder='Enter Declared Tax' 
+                                className='w-full border border-black p-3 rounded-lg new-inp'/>
+                            </div>
+                            <div className='flex flex-col gap-1'>
+                                <label>Re Expedition</label>
+                                <input 
+                                onChange={(e) => SetRe_exp(e.target.value)}
+                                value={re_exp}
+                                type='number' placeholder='Enter Re Expedition' 
+                                className='w-full border border-black p-3 rounded-lg new-inp'/>
+                            </div>
+                        </div>
+
+                        <div className="flex flex-col md:flex-row gap-5">
+                            <div className='flex flex-col gap-1'>
+                                <label>Courier Fee</label>
+                                <input 
+                                onChange={(e) => SetC_fee(e.target.value)}
+                                value={c_fee}
+                                type='number' placeholder='Enter Courier Fee' 
+                                className='w-full border border-black p-3 rounded-lg new-inp'/>
+                            </div>
+                        </div>
+
                         <span className="font-bold text-xl">Recipient Info</span>
 
                         <div className="flex flex-col md:flex-row gap-5">
