@@ -1,5 +1,6 @@
 "use client";
-
+import ReactToPrint from "react-to-print";
+import { useReactToPrint } from 'react-to-print';
 import Image from "next/image";
 import boxIcon from "@/public/box.png";
 import locationIcon from "@/public/location.png";
@@ -12,19 +13,15 @@ import sizeIcon from "@/public/size.png";
 import BarcodeEl from "./BacodeEl";
 import PrintBtn from "./PrintBtn";
 import Logo from '@/public/logo.png';
+import { useRef } from "react";
 
-const Print = () =>{     
-        //console.log('print');  
-        let printContents = document.getElementById('printablediv').innerHTML;
-        let originalContents = document.body.innerHTML;
-        document.body.innerHTML = printContents;
-        let done = window.print();
-        if(!done) {
-            alert("Continue to Page");
-        }
-        document.body.innerHTML = originalContents; 
-    }
-
+// const Print = () =>{       
+//         let printContents = document.getElementById('printablediv').innerHTML;
+//         let originalContents = document.body.innerHTML;
+//         document.body.innerHTML = printContents;
+//         window.print();
+//         document.body.innerHTML = originalContents; 
+//     }
 export default function Result({ tracking_id, origin_city, city_collection, shipping_date, shipping_time, sender_name, 
     sender_address, shipping_quantity, item_weight, phn, email, paymode, service_type, company, 
     ship_mode, desc, length, width, height, weight_vol, dec_value, price_lb, discount, insurance, 
@@ -32,9 +29,12 @@ export default function Result({ tracking_id, origin_city, city_collection, ship
     shipping_time_rec, delivery_time, receiver_name, receiver_address, 
     commentData, barData, subTotal, taxTotal, cusTotal, feeTotal }) {
 
+    const componentRef = useRef();
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current,
+        documentTitle: `Print Invoice: ${tracking_id}`,
+    });
     
-    console.log("I am tracking id: ", tracking_id);
-
     return (
         <div className="w-full pt-24">
                 <div className="w-11/12 mx-auto flex gap-8 flex-col md:flex-row">
@@ -53,9 +53,9 @@ export default function Result({ tracking_id, origin_city, city_collection, ship
                                 </span>
                             </div>
                             <div>
-                            <button className="py-2 px-6 bg-blue-500 hover:bg-blue-600 text-white rounded-lg" onClick={Print}>
-                                Print Shipment
-                            </button>
+                                <button className="py-2 px-6 bg-blue-500 hover:bg-blue-600 text-white rounded-lg" onClick={handlePrint}>
+                                    Print Shipment
+                                </button>
                             </div>
                         </div>
 
@@ -287,8 +287,8 @@ export default function Result({ tracking_id, origin_city, city_collection, ship
                     </div>
                 </div>
 
-
-                <div className="w-8/12 mx-auto" id='printablediv' style={{ display : "none"}}>
+                <div style={{ display : "none"}}>
+                   <div className="w-11/12 mx-auto" id='printablediv' ref={componentRef}>
                     <div className="w-full mb-32">
                         <div className="flex justify-between gap-25 items-center border-b border-black pb-4">
                             <div className="flex gap-2 items-center">
@@ -552,7 +552,9 @@ export default function Result({ tracking_id, origin_city, city_collection, ship
                             </div>
                         </div>
                     </div>
+                </div> 
                 </div>
+                
             </div>
     )
 }
