@@ -22,7 +22,9 @@
     "react": "^18",
     "react-barcode": "^1.4.6",
     "react-dom": "^18",
-    "react-to-print": "^2.14.15"
+    "react-to-print": "^2.14.15",
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.10.1"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",
