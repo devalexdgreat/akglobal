@@ -9,15 +9,14 @@ export default function Footer() {
             <div className="w-11/12 md:w-11/12 mx-auto">
                 <div className="w-full flex flex-col gap-1 md:gap-0 md:flex-row items-center 
                 text-center justify-center md:justify-between">
-                    <div className="flex flex-col md:flex-row w-full md:w-6/12 justify-between">
-                    <Link className="font-medium text-lg flex items-center gap-1 justify-center" href={'/'}>
-                        <Image src={Logo} alt="" className="h-10 w-10" />
-                        <span>AK GLOBAL SHIP SERVICES</span>
-                    </Link>
+                    <div className="flex flex-col md:flex-row w-full md:w-7/12 justify-between">
+                        <Link className="font-medium text-lg flex items-center gap-1 justify-center" href={'/'}>
+                            <Image src={Logo} alt="" className="h-10 w-10" />
+                            <span>AK GLOBAL SHIP SERVICES</span>
+                        </Link>
                         <div className="flex flex-col gap-4 md:mt-0 mt-4">
                             <h1 className="font-medium text-blue-600">Contact</h1>
-                            <Link href={"#"} className="text-sm" >Support@akglobalshipservices.com</Link>
-                            <Link href={"#"} className="text-sm" >Sales@akglobalshipservices.com</Link>
+                            <Link href={"mailto:Support@akglobalshipservices.com"} className="text-sm" >Support@akglobalshipservices.com</Link>
                         </div>
                     </div>
                     <div className="w-full md:w-5/12 flex justify-center">
