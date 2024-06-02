@@ -17,6 +17,7 @@ export default function Footer() {
                         <div className="flex flex-col gap-4 md:mt-0 mt-4">
                             <h1 className="font-medium text-blue-600">Contact</h1>
                             <Link href={"mailto:Support@akglobalshipservices.com"} className="text-sm" >Support@akglobalshipservices.com</Link>
+                            <Link href={"tel:+6585489036"} className="text-sm" >+65 8548 9036 </Link>
                         </div>
                     </div>
                     <div className="w-full md:w-5/12 flex justify-center">
