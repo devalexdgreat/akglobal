@@ -303,7 +303,7 @@ export default function Result({ tracking_id, origin_city, city_collection, ship
                             
                             <div className="flex flex-col text-center">
                                 <span>NIT: 800124570-87</span>
-                                <span>Phone: 6692843100</span>
+                                <span>Phone: +65 8548 9036</span>
                                 <span>Email: Support@akglobalshipservices.com</span>
                                 <span>Address: (B01) 994 Bendemeer Road <br/> #06-06 B-Central, Singapore 339943</span>
                             </div>
